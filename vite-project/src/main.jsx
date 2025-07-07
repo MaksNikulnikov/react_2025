@@ -3,22 +3,22 @@ import { restaurants } from "./assets/mock";
 
 createRoot(document.getElementById("root")).render(
   <ul>
-    {restaurants.map((restaurant) => {
+    {restaurants.map(({id, name, menu, reviews}) => {
       return (
-        <li key={restaurant.id}>
-          <h2>{restaurant.name}</h2>
+        <li key={id}>
+          <h2>{name}</h2>
 
           <h3>Меню</h3>
           <ul>
-            {restaurant.menu.map((menuItem) => (
-              <li key={menuItem.id}>{menuItem.name}</li>
+            {menu.map(({id, name}) => (
+              <li key={id}>{name}</li>
             ))}
           </ul>
 
           <h3>Отзывы</h3>
           <ul>
-            {restaurant.reviews.map((review) => (
-              <li key={review.id}>{review.text}</li>
+            {reviews.map(({id, text}) => (
+              <li key={id}>{text}</li>
             ))}
           </ul>
         </li>
