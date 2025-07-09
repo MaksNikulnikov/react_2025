@@ -1,7 +1,10 @@
-import React from 'react'
+import { Counter } from '../counter/Counter'
 
-export default function MenuItem({ name }) {
+export const MenuItem = ({ name }) => {
   return (
-    <li>{name}</li>
+    <li>
+      <span>{name}</span>
+      <Counter />  
+    </li>
   )
 }

@@ -1,7 +1,7 @@
-import Menu from "../menu/Menu";
-import Reviews from "../reviews/Reviews";
+import { Menu } from "../menu/Menu";
+import { Reviews } from "../reviews/Reviews";
 
-export default function Restaurant({ name, menu, reviews }) {
+export const Restaurant = ({ name, menu, reviews }) => {
   return (
     <li>
       <h2>{name}</h2>

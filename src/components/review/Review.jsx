@@ -1,6 +1,4 @@
-import React from 'react'
-
-export default function Review({ text }) {
+export const Review = ({ text }) => {
   return (
      <li>{text}</li>
   )
