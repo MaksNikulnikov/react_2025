@@ -1,15 +1,18 @@
-import React from "react";
-import Review from "../review/Review";
+import { Review } from "../review/Review";
 
-export default function Reviews({ reviews }) {
+export const Reviews = ({ reviews }) => {
   return (
     <>
       <h3>Отзывы</h3>
-      <ul>
-        {reviews.map((review) => (
-          <Review key={review.id} {...review} />
-        ))}
-      </ul>
+      {reviews.length ? (
+        <ul>
+          {reviews.map((review) => (
+            <Review key={review.id} {...review} />
+          ))}
+        </ul>
+      ) : (
+        <p>Отзывов пока нет</p>
+      )}
     </>
   );
-}
+};

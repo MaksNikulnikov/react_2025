@@ -1,4 +1,4 @@
-import RestaurantsList from '../resraurants-list/RestaurantsList'
+import { RestaurantsList } from '../resraurants-list/RestaurantsList'
 
 export const RestaurantsPage = ({restaurants}) => {
   return (
