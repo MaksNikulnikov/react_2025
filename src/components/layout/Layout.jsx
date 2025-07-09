@@ -1,4 +1,4 @@
-export const Layout = ({children}) => {
+export const Layout = ({ children }) => {
   return (
     <>
       <header>header</header>

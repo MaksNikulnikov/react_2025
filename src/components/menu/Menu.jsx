@@ -4,7 +4,7 @@ export const Menu = ({ menu }) => {
   return (
     <>
       <h3>Меню</h3>
-      {menu.length ? (
+      {menu?.length ? (
         <ul>
           {menu.map((menuItem) => (
             <MenuItem key={menuItem.id} {...menuItem} />

@@ -6,9 +6,9 @@ export const Counter = () => {
   const { count, increment, decrement } = useCounter(LIMIT);
   return (
     <div>
-      <button onClick={increment}>+</button>
-      <span>{count}</span>
       <button onClick={decrement}>-</button>
+      <span>{count}</span>
+      <button onClick={increment}>+</button>
     </div>
   );
 };
