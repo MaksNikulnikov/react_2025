@@ -6,20 +6,20 @@ import { getValidRestaurants } from "./utils";
 export const RestaurantsPage = ({ restaurants }) => {
   const { validRestaurants, isEmpty, firstId, getById } =
     getValidRestaurants(restaurants);
-  const [activeId, setActiveId] = useState(firstId);
+  const [activeRestaurantId, setActiveRestaurantId] = useState(firstId);
 
   if (isEmpty) {
     return <p>Рестораны отсутствуют</p>;
   }
 
-  const activeRestaurant = getById(activeId);
+  const activeRestaurant = getById(activeRestaurantId);
   return (
     <>
       <h1>Рестораны</h1>
       <RestaurantsTabList
-        setActiveId={setActiveId}
+        setActiveId={setActiveRestaurantId}
         restaurants={validRestaurants}
-      ></RestaurantsTabList>
+      />
       {activeRestaurant ? (
         <Restaurant {...activeRestaurant} />
       ) : (
