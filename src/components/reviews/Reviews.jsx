@@ -1,3 +1,4 @@
+import { ReviewForm } from "../review-form/ReviewForm";
 import { ReviewListItem } from "../review-list-item/ReviewListItem";
 
 export const Reviews = ({ reviews }) => {
@@ -13,6 +14,7 @@ export const Reviews = ({ reviews }) => {
       ) : (
         <p>Отзывов пока нет</p>
       )}
+      <ReviewForm />
     </>
   );
 };
