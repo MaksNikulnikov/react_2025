@@ -10,7 +10,7 @@ export const RestaurantsTabList = ({ restaurants, setActiveId }) => {
               key={restaurant.id}
               restaurant={restaurant}
               setActiveId={setActiveId}
-            ></RestaurantTab>
+            />
           ))}
         </nav>
       ) : (
