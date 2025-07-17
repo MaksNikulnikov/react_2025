@@ -2,6 +2,7 @@ import { Restaurant } from "../restaurant/Restaurant";
 import { useState } from "react";
 import { RestaurantsTabList } from "../restaurants-tab-list/RestaurantsTabList";
 import { getValidRestaurants } from "./utils";
+import styles from "./restaurant-page.module.css"
 
 export const RestaurantsPage = ({ restaurants }) => {
   const { validRestaurants, isEmpty, firstId, getById } =
@@ -14,17 +15,18 @@ export const RestaurantsPage = ({ restaurants }) => {
 
   const activeRestaurant = getById(activeRestaurantId);
   return (
-    <>
-      <h1>Рестораны</h1>
+    <div className={styles.page}>
+      <h1 className={styles.title}>Рестораны</h1>
       <RestaurantsTabList
         setActiveId={setActiveRestaurantId}
         restaurants={validRestaurants}
+        activeRestaurantId = {activeRestaurantId}
       />
       {activeRestaurant ? (
         <Restaurant {...activeRestaurant} />
       ) : (
-        <p>Выберите ресторан</p>
+        <p className={styles.message}>Выберите ресторан</p>
       )}
-    </>
+    </div>
   );
 };
