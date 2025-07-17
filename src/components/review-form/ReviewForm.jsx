@@ -1,4 +1,4 @@
-import React from "react";
+import { useReducer } from "react";
 const DEFAULT_STATE = {
   name: "",
   review: "",
@@ -26,11 +26,11 @@ const reducer = (state, action) => {
   }
 };
 export const ReviewForm = () => {
-  const [form, dispatch] = React.useReducer(reducer, DEFAULT_STATE);
+  const [form, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
   const { name, review, rating } = form;
   return (
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div>
         <label htmlFor="name">Имя</label>
         <input
@@ -45,14 +45,14 @@ export const ReviewForm = () => {
       </div>
       <div>
         <label htmlFor="review">Отзыв</label>
-        <textarea 
-        id="review"
-        value={review} placeholder="Введите ваш отзыв"
-          onChange=
-          {(e) =>
+        <textarea
+          id="review"
+          value={review}
+          placeholder="Введите ваш отзыв"
+          onChange={(e) =>
             dispatch({ type: ACTION_TYPES.SET_REVIEW, payload: e.target.value })
-          }>
-        </textarea>
+          }
+        ></textarea>
       </div>
       <div>
         <label htmlFor="rating">Рейтинг</label>
@@ -64,9 +64,11 @@ export const ReviewForm = () => {
           }
         >
           {[1, 2, 3, 4, 5].map((n) => {
-            return <option key={n} value={n.toString()}>
-              {n}
-            </option>;
+            return (
+              <option key={n} value={n.toString()}>
+                {n}
+              </option>
+            );
           })}
         </select>
       </div>

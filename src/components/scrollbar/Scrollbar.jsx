@@ -27,6 +27,6 @@ export default function Scrollbar() {
       style={{
         width: `${scrollProgress}%`,
       }}
-    ></div>
+    />
   );
 }
