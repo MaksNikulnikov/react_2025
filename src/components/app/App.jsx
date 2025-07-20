@@ -4,13 +4,16 @@ import { restaurants } from "../../assets/mock";
 
 import "./reset.css";
 import { ThemeContextProvider } from "../theme-context/ThemeContextProvider";
+import { UserContextProvider } from "../user-context/UserContextProvider";
 
 export const App = () => {
   return (
     <ThemeContextProvider>
-      <Layout>
-        <RestaurantsPage restaurants={restaurants} />
-      </Layout>
+      <UserContextProvider>
+        <Layout>
+          <RestaurantsPage restaurants={restaurants} />
+        </Layout>
+      </UserContextProvider>
     </ThemeContextProvider>
   );
 };
