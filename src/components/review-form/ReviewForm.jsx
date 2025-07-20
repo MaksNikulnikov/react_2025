@@ -1,5 +1,6 @@
 import { useForm } from "./useForm";
 import styles from "./review-form.module.css";
+import { Button } from "../button/Button";
 
 export const ReviewForm = () => {
   const { form, setName, setReview, setRating, clear } = useForm();
@@ -54,12 +55,8 @@ export const ReviewForm = () => {
         </select>
       </div>
       <div className={styles.actions}>
-        <button className={`${styles.button} ${styles.clear}`} onClick={clear}>
-          Очистить
-        </button>
-        <button className={styles.button} type="submit">
-          Отправить
-        </button>
+        <Button onClick={clear} name="Очистить"></Button>
+        <Button type="submit" color="colorBlue" name="Отправить"></Button>
       </div>
     </form>
   );
