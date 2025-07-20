@@ -13,7 +13,6 @@ export const Button = ({
 }) => {
 
   const {theme} = useTheme()
-  console.log('theme', theme)
   return (
     <ThemeContextProvider>
       <button
