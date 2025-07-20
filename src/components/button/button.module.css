@@ -38,3 +38,13 @@
 .buttonBase.colorBlue:hover {
     background-color: #aaa;
 }
+
+.dark {
+  background-color: #333;
+  color: white;
+  border-color: #555;
+}
+
+.dark:hover {
+  background-color: #444;
+}
