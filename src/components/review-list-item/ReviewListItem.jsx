@@ -1,5 +1,5 @@
 import { Counter } from "../counter/Counter";
-import styles from "./review-list-item.module.css"
+import styles from "./review-list-item.module.css";
 
 export const ReviewListItem = ({ text }) => {
   return (

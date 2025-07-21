@@ -55,8 +55,8 @@ export const ReviewForm = () => {
         </select>
       </div>
       <div className={styles.actions}>
-        <Button onClick={clear} name="Очистить"/>
-        <Button type="submit" color="Blue" name="Отправить"/>
+        <Button onClick={clear} name="Очистить" />
+        <Button type="submit" color="Blue" name="Отправить" />
       </div>
     </form>
   );

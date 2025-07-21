@@ -6,8 +6,9 @@ export const UserContextProvider = ({ children }) => {
 
   const logIn = (userName) => setName(userName);
   const logOut = () => setName("");
-  const isLogged = name!=="";
+  const isLogged = name !== "";
 
-
-  return <UserContext value={{ logIn, logOut, isLogged }}>{children}</UserContext>;
+  return (
+    <UserContext value={{ logIn, logOut, isLogged }}>{children}</UserContext>
+  );
 };
