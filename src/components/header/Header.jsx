@@ -20,7 +20,7 @@ export const Header = () => {
         }}
         name={isLogged ? "Logout" : "Login"}
       ></Button>
-      <Button onClick={toggleTheme} name={theme}></Button>
+      <Button onClick={toggleTheme} name={theme} />
     </header>
   );
 };

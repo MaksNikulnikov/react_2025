@@ -1,6 +1,4 @@
 .buttonBase {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -20,31 +18,58 @@
   border-radius: 8px;
 }
 
-.buttonBase:hover {
+.colorBaseLight {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+.colorBaseLight:hover {
   background-color: #e0e0e0;
 }
 
-.active {
-  background-color: #3498db;
-  color: white;
-  border-color: #2980b9;
-}
-
-.colorBlue {
-  background-color: #007bff;
-  color: white;
-}
-
-.buttonBase.colorBlue:hover {
-    background-color: #aaa;
-}
-
-.dark {
+.colorBaseDark {
   background-color: #333;
   color: white;
   border-color: #555;
 }
 
-.dark:hover {
+.colorBaseDark:hover {
   background-color: #444;
+}
+.colorBlueLight {
+  background-color: #007bff;
+  color: white;
+}
+
+.colorBlueLight:hover {
+  background-color: #3399ff;
+}
+
+.colorBlueDark {
+  background-color: #0056b3;
+  color: white;
+}
+
+.colorBlueDark:hover {
+  background-color: #003d80;
+  border-color: #333;
+}
+
+.colorGreenLight {
+  background-color: #28a745;
+  color: white;
+}
+
+.colorGreenLight:hover {
+  background-color: #45c16c;
+}
+
+.colorGreenDark {
+  background-color: #1e7e34;
+  color: white;
+}
+
+.colorGreenDark:hover {
+  background-color: #155d27;
+  border-color: #2c3e50;
 }
