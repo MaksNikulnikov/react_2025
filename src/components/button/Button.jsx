@@ -12,7 +12,7 @@ export const Button = ({
 }) => {
   const { theme } = useTheme();
 
-  const colorClass = isActive ? "Green" : color
+  const colorClass = isActive ? "Green" : color;
 
   const colorThemeClass =
     color && theme === "🌙 Dark"
@@ -21,9 +21,14 @@ export const Button = ({
 
   return (
     <button
-      className={classNames(styles.buttonBase, styles[variant], colorThemeClass, {
-        [styles.active]: isActive,
-      })}
+      className={classNames(
+        styles.buttonBase,
+        styles[variant],
+        colorThemeClass,
+        {
+          [styles.active]: isActive,
+        },
+      )}
       onClick={onClick}
       type={type}
     >
