@@ -7,6 +7,6 @@ export const RestaurantTab = ({ restaurant, setActiveId, isActive }) => {
       name={name ?? "placeholder"}
       onClick={() => setActiveId(id)}
       isActive={isActive}
-    ></Button>
+    />
   );
 };
