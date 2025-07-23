@@ -1,5 +1,5 @@
 import { MenuItem } from "../menu-item/MenuItem";
-import styles from "./menu.module.css"
+import styles from "./menu.module.css";
 
 export const Menu = ({ menu }) => {
   return (
