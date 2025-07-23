@@ -1,9 +1,12 @@
-import styles from "./restaurant-tab.module.css"
-import classNames from "classnames";
+import { Button } from "../button/Button";
 
 export const RestaurantTab = ({ restaurant, setActiveId, isActive }) => {
   const { id, name } = restaurant;
   return (
-    <button className={classNames(styles.button, { [styles.active]: isActive })} onClick={() => setActiveId(id)}>{name ?? "placeholder"}</button>
+    <Button
+      name={name ?? "placeholder"}
+      onClick={() => setActiveId(id)}
+      isActive={isActive}
+    />
   );
 };

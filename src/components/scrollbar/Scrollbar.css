@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   height: 10px;
-  background-color: #DC2626;
+  background-color: #dc2626;
   z-index: 1000;
   transition: width 0.1s ease-out;
 }
