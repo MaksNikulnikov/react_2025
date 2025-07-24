@@ -1,4 +1,4 @@
-import { Counter } from "../counter/Counter";
+import { DishCounter } from "../dish-counter/DishCounter";
 import { useUser } from "../user-context/use-user";
 import styles from "./menu-item.module.css";
 
@@ -7,7 +7,7 @@ export const MenuItem = ({ dish }) => {
   return (
     <li className={styles.item}>
       <span>{dish.name}</span>
-      <Counter isDisabled={!isLogged} />
+      <DishCounter isDisabled={!isLogged} />
     </li>
   );
 };

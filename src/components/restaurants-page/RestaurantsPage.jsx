@@ -5,7 +5,7 @@ import { RestaurantsTabListContainer } from "../restaurants-tab-list/Restaurants
 
 export const RestaurantsPage = ({ restaurantsIds }) => {
   const [activeRestaurantId, setActiveRestaurantId] = useState(
-    restaurantsIds[0]
+    restaurantsIds[0],
   );
   return (
     <div className={styles.page}>
