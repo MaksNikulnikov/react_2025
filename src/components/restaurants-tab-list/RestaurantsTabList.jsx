@@ -1,21 +1,22 @@
 import { RestaurantTab } from "../restaurant-tab/RestaurantTab";
+import { RestaurantsTabContainer } from "../restaurant-tab/RestaurantTab.container";
 import styles from "./restaurants-tab-list.module.css";
 
 export const RestaurantsTabList = ({
-  restaurants,
+  restaurantsIds,
   setActiveId,
   activeRestaurantId,
 }) => {
   return (
     <>
-      {restaurants.length ? (
+      {restaurantsIds.length ? (
         <nav className={styles.nav}>
-          {restaurants.map((restaurant) => (
-            <RestaurantTab
-              key={restaurant.id}
-              restaurant={restaurant}
+          {restaurantsIds.map((restaurantId) => (
+            <RestaurantsTabContainer
+              key={restaurantId}
+              restaurantId={restaurantId}
               setActiveId={setActiveId}
-              isActive={restaurant.id === activeRestaurantId}
+              isActive={restaurantId === activeRestaurantId}
             />
           ))}
         </nav>
