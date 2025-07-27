@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./restaurant-page.module.css";
 import { RestaurantContainer } from "../restaurant/Restaurant.container";
-import { RestaurantsTabListContainer } from "../restaurants-tab-list/RestaurantsTabList.container";
+import { RestaurantsTabList } from "../restaurants-tab-list/RestaurantsTabList";
 
 export const RestaurantsPage = ({ restaurantsIds }) => {
   const [activeRestaurantId, setActiveRestaurantId] = useState(
@@ -10,7 +10,7 @@ export const RestaurantsPage = ({ restaurantsIds }) => {
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Рестораны</h1>
-      <RestaurantsTabListContainer
+      <RestaurantsTabList
         setActiveId={setActiveRestaurantId}
         restaurantsIds={restaurantsIds}
         activeRestaurantId={activeRestaurantId}

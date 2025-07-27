@@ -1,19 +1,28 @@
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../../redux/entities/cart/slice";
+import { selectMultipleDishesById } from "../../redux/entities/dishes/slice";
 
 export const Cart = () => {
-  const items = useSelector(selectCartItems);
+  const cart = useSelector((state) => state.cart);
+  const cartEntries = Object.entries(cart);
 
-  if (!items.length) {
+  const dishIds = Object.keys(cart);
+  const dishes = useSelector((state) =>
+    selectMultipleDishesById(state, dishIds),
+  );
+
+  if (cartEntries.length === 0) {
     return <div>no items</div>;
   }
   return (
     <div>
-      {items.map(({ id, amount }) => (
-        <div key={id}>
-          {amount} - {id}
-        </div>
-      ))}
+      {cartEntries.map(([id, amount]) => {
+        const dish = dishes.find((d) => d.id === id);
+        return (
+          <div key={id}>
+            {amount} – {dish?.name || "unknown dish"}
+          </div>
+        );
+      })}
     </div>
   );
 };
