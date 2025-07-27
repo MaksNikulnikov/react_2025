@@ -7,7 +7,7 @@ export const MenuItem = ({ dish }) => {
   return (
     <li className={styles.item}>
       <span>{dish.name}</span>
-      <DishCounter isDisabled={!isLogged} />
+      <DishCounter dishId={dish.id} isDisabled={!isLogged} />
     </li>
   );
 };
