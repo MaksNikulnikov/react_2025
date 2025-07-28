@@ -1,10 +1,10 @@
 import { Counter } from "../counter/Counter";
 import styles from "./review-list-item.module.css";
 
-export const ReviewListItem = ({ text }) => {
+export const ReviewListItem = ({ review }) => {
   return (
     <li className={styles.item}>
-      {text}
+      {review.text}
       <Counter />
     </li>
   );

@@ -2,6 +2,7 @@ import { useTheme } from "../theme-context/use-theme";
 import { Button } from "../button/Button";
 import styles from "./header.module.css";
 import { useUser } from "../user-context/use-user";
+import { Cart } from "../cart/Cart";
 
 export const Header = () => {
   const { toggleTheme, theme } = useTheme();
@@ -19,8 +20,9 @@ export const Header = () => {
           }
         }}
         name={isLogged ? "Logout" : "Login"}
-      ></Button>
+      />
       <Button onClick={toggleTheme} name={theme} />
+      <Cart />
     </header>
   );
 };
