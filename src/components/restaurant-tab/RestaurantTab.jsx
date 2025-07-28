@@ -1,12 +1,15 @@
-import { Button } from "../button/Button";
+import { NavLink } from "react-router";
+import styles from "./restaurant-tab.module.css";
 
-export const RestaurantTab = ({ restaurant, setActiveId, isActive }) => {
+export const RestaurantTab = ({ restaurant }) => {
   const { id, name } = restaurant;
+
   return (
-    <Button
-      name={name ?? "placeholder"}
-      onClick={() => setActiveId(id)}
-      isActive={isActive}
-    />
+    <NavLink
+      to={`/restaurants/${id}`}
+      className={styles.linkButton}
+    >
+      {name}
+    </NavLink>
   );
 };
