@@ -11,33 +11,3 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
-
-.tab {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 1rem;
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-}
-
-.tab:hover {
-  background-color: #e0e0e0;
-}
-
-.tabActive {
-  background-color: #3498db;
-  border: 1px solid #2980b9;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 1rem;
-  text-decoration: none;
-  color: white;
-  display: inline-block;
-}
