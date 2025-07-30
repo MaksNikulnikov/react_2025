@@ -1,13 +1,14 @@
-import { useParams, NavLink, Outlet } from "react-router";
+import { useParams, Outlet } from "react-router";
 import { useSelector } from "react-redux";
 import { selectRestaurantById } from "../../redux/entities/restoraunts/slice";
 import styles from "./restaurant-page.module.css";
+import { TabLink } from "../../components/tab-link/TabLink";
 
 export const RestaurantPage = () => {
   const { restaurantId } = useParams();
 
   const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId),
+    selectRestaurantById(state, restaurantId)
   );
 
   if (!restaurant) return <p>Ресторан не найден</p>;
@@ -17,22 +18,8 @@ export const RestaurantPage = () => {
       <h2>{restaurant.name}</h2>
 
       <nav className={styles.tabs}>
-        <NavLink
-          to="menu"
-          className={({ isActive }) =>
-            isActive ? styles.tabActive : styles.tab
-          }
-        >
-          Меню
-        </NavLink>
-        <NavLink
-          to="reviews"
-          className={({ isActive }) =>
-            isActive ? styles.tabActive : styles.tab
-          }
-        >
-          Отзывы
-        </NavLink>
+        <TabLink to="menu">Меню</TabLink>
+        <TabLink to="reviews">Отзывы</TabLink>
       </nav>
 
       <div className={styles.content}>
