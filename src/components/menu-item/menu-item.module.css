@@ -6,7 +6,19 @@
   border-bottom: 1px solid #eee;
 }
 
-.item span {
+.name {
   font-weight: 500;
-  color: #555;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.name:hover,
+.name:focus-visible {
+  color: #0070f3;
+}
+
+.name.active {
+  color: #000;
+  font-weight: 600;
 }

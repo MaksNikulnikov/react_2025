@@ -4,8 +4,6 @@ import { RestaurantTab } from "./RestaurantTab";
 
 export const RestaurantsTabContainer = ({
   restaurantId,
-  setActiveId,
-  isActive,
 }) => {
   const restaurant = useSelector((state) =>
     selectRestaurantById(state, restaurantId),
@@ -13,9 +11,7 @@ export const RestaurantsTabContainer = ({
 
   return (
     <RestaurantTab
-      isActive={isActive}
       restaurant={restaurant}
-      setActiveId={setActiveId}
     />
   );
 };
