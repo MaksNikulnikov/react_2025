@@ -4,14 +4,11 @@ import { useSelector } from "react-redux";
 import { selectRestaurantsIds } from "../../redux/entities/restoraunts/slice";
 
 export const RestaurantsPage = () => {
-
-  const restaurantsIds = useSelector(selectRestaurantsIds)
+  const restaurantsIds = useSelector(selectRestaurantsIds);
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Рестораны</h1>
-      <RestaurantsTabList
-        restaurantsIds={restaurantsIds}
-      />
+      <RestaurantsTabList restaurantsIds={restaurantsIds} />
     </div>
   );
 };

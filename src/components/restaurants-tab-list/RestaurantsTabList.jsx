@@ -1,9 +1,7 @@
 import { RestaurantsTabContainer } from "../restaurant-tab/RestaurantTab.container";
 import styles from "./restaurants-tab-list.module.css";
 
-export const RestaurantsTabList = ({
-  restaurantsIds,
-}) => {
+export const RestaurantsTabList = ({ restaurantsIds }) => {
   return (
     <>
       {restaurantsIds.length ? (
