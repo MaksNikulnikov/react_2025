@@ -5,10 +5,7 @@ export const RestaurantTab = ({ restaurant }) => {
   const { id, name } = restaurant;
 
   return (
-    <NavLink
-      to={`/restaurants/${id}`}
-      className={styles.linkButton}
-    >
+    <NavLink to={`/restaurants/${id}`} className={styles.linkButton}>
       {name}
     </NavLink>
   );

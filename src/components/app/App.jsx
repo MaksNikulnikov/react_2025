@@ -10,7 +10,7 @@ export const App = () => {
     <Provider store={store}>
       <ThemeContextProvider>
         <UserContextProvider>
-          <AppRoutes/>
+          <AppRoutes />
         </UserContextProvider>
       </ThemeContextProvider>
     </Provider>
