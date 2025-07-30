@@ -1,12 +1,7 @@
-import { RestaurantTab } from "../restaurant-tab/RestaurantTab";
 import { RestaurantsTabContainer } from "../restaurant-tab/RestaurantTab.container";
 import styles from "./restaurants-tab-list.module.css";
 
-export const RestaurantsTabList = ({
-  restaurantsIds,
-  setActiveId,
-  activeRestaurantId,
-}) => {
+export const RestaurantsTabList = ({ restaurantsIds }) => {
   return (
     <>
       {restaurantsIds.length ? (
@@ -15,8 +10,6 @@ export const RestaurantsTabList = ({
             <RestaurantsTabContainer
               key={restaurantId}
               restaurantId={restaurantId}
-              setActiveId={setActiveId}
-              isActive={restaurantId === activeRestaurantId}
             />
           ))}
         </nav>
