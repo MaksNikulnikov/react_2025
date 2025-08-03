@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../redux/entities/restoraunts/slice";
+import { selectRestaurantById } from "../../redux/entities/restaurants/slice";
 import { RestaurantTab } from "./RestaurantTab";
 
 export const RestaurantsTabContainer = ({
