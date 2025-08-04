@@ -10,7 +10,6 @@ import { REQUEST_STATUS } from "../../redux/constants";
 import { MenuPageSkeleton } from "./skeleton/MenuPage.skeleton";
 
 export const MenuPage = () => {
-  console.log("menu page")
   const dispatch = useDispatch();
   const { restaurantId } = useParams();
   const { menuIds } = useOutletContext();
