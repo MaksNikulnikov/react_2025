@@ -32,19 +32,6 @@
   animation: pulse 1.5s infinite ease-in-out;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.block {
-  height: 2.5rem;
-  background: #ddd;
-  border-radius: 4px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
 @keyframes pulse {
   0% {
     opacity: 1;

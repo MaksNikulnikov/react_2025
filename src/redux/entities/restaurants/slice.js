@@ -6,9 +6,9 @@ import { getRestaurant } from "./get-restaurant";
 const entityAdapter = createEntityAdapter();
 
 const initialState = entityAdapter.getInitialState({
-    requestRestaurantsStatus: REQUEST_STATUS.IDLE,
-    requestStatusById: {},
-  })
+  requestRestaurantsStatus: REQUEST_STATUS.IDLE,
+  requestStatusById: {},
+});
 
 export const restaurantsSlice = createSlice({
   name: "restaurants",
@@ -36,17 +36,15 @@ export const restaurantsSlice = createSlice({
         state.requestStatusById[meta.arg] = REQUEST_STATUS.REJECTED;
       })
       .addCase(getRestaurant.fulfilled, (state, { payload }) => {
-        entityAdapter.addOne(state, payload)
+        entityAdapter.addOne(state, payload);
         state.requestStatusById[payload.id] = REQUEST_STATUS.FULFILLED;
       }),
 });
 
-export const {
-  selectRequestStatus,
-  selectRequestStatusById,
-} = restaurantsSlice.selectors;
+export const { selectRequestStatus, selectRequestStatusById } =
+  restaurantsSlice.selectors;
 
 export const {
-    selectById: selectRestaurantById,
+  selectById: selectRestaurantById,
   selectIds: selectRestaurantsIds,
-} = entityAdapter.getSelectors((state) => state.restaurants)
+} = entityAdapter.getSelectors((state) => state.restaurants);
