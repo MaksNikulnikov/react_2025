@@ -1,26 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedDishes } from "../../../assets/normalized-mock";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getDishes } from "./get-dishes";
+import { REQUEST_STATUS } from "../../constants";
 
-const initialState = {
-  ids: normalizedDishes.map(({ id }) => id),
-  entities: normalizedDishes.reduce((acc, dish) => {
-    acc[dish.id] = dish;
+const entityAdapter = createEntityAdapter();
 
-    return acc;
-  }, {}),
-};
+const initialState = entityAdapter.getInitialState({
+  requestStatusByRestaurantId: {},
+});
 
 export const dishesSlice = createSlice({
   name: "dishes",
   initialState,
-  selectors: {
-    selectDishById: (state, id) => state.entities[id],
-    selectMultipleDishesById: (state, ids) => {
-      return ids.map((id) => state.entities[id]);
-    },
-    selectDishesIds: (state) => state.ids,
-  },
+  reducers: {},
+  extraReducers: (builder) =>
+    builder
+      .addCase(getDishes.pending, (state, { meta }) => {
+        console.log('pending')
+        state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.PENDING;
+      })
+      .addCase(getDishes.rejected, (state, { meta }) => {
+        state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.REJECTED;
+      })
+      .addCase(getDishes.fulfilled, (state, { payload }) => {
+        console.log('fulldiled::', payload)
+        entityAdapter.upsertMany(state, payload.dishes);
+        state.requestStatusByRestaurantId[payload.restaurantId] = REQUEST_STATUS.FULFILLED;
+      }),
 });
 
-export const { selectDishById, selectDishesIds, selectMultipleDishesById } =
-  dishesSlice.selectors;
+export const {
+  selectById: selectDishById,
+  selectIds: selectDishesIds,
+  selectEntities,
+  selectAll: selectAllDishes,
+} = entityAdapter.getSelectors((state) => state.dishes);
+
+export const selectMultipleDishesById = (state, ids) =>
+  ids.map((id) => selectDishById(state, id));
+
+export const selectDishesRequestStatus = (state, restaurantId) => {
+return   state.dishes.requestStatusByRestaurantId[restaurantId] || REQUEST_STATUS.IDLE;
+}
+

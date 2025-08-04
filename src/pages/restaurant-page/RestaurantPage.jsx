@@ -6,7 +6,7 @@ import { TabLink } from "../../components/tab-link/TabLink";
 import { useEffect } from "react";
 import { getRestaurant } from "../../redux/entities/restaurants/get-restaurant";
 import { REQUEST_STATUS } from "../../redux/constants";
-import { RestaurantSkeleton } from "./skeleton/Restaurant.skeleton";
+import { RestaurantPageSkeleton } from "./skeleton/restaurant-page.skeleton";
 
 export const RestaurantPage = () => {
   const { restaurantId } = useParams();
@@ -23,7 +23,7 @@ export const RestaurantPage = () => {
   }, [dispatch, restaurantId]);
 
   if (requestStatus === REQUEST_STATUS.IDLE || requestStatus === REQUEST_STATUS.PENDING) 
-    return <RestaurantSkeleton/>
+    return <RestaurantPageSkeleton/>
   if (!restaurant)
     return null
 
