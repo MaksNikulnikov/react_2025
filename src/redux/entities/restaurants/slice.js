@@ -1,23 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { REQUEST_STATUS } from "../../constants";
 import { getRestaurants } from "./get-restaurants";
 import { getRestaurant } from "./get-restaurant";
 
-const initialState = {
-  ids: [],
-  entities: {},
-  requestRestaurantsStatus: REQUEST_STATUS.IDLE,
-  requestStatusById: {},
-};
+const entityAdapter = createEntityAdapter();
+
+const initialState = entityAdapter.getInitialState({
+    requestRestaurantsStatus: REQUEST_STATUS.IDLE,
+    requestStatusById: {},
+  })
 
 export const restaurantsSlice = createSlice({
   name: "restaurants",
   initialState,
   selectors: {
-    selectRestaurantById: (state, id) => state.entities[id],
-    selectRestaurantsIds: (state) => state.ids,
     selectRequestStatus: (state) => state.requestRestaurantsStatus,
-    selectRequestStatusById: (state, id) => state.requestStatusById[id]
+    selectRequestStatusById: (state, id) => state.requestStatusById[id],
   },
   extraReducers: (builder) =>
     builder
@@ -29,12 +27,7 @@ export const restaurantsSlice = createSlice({
       })
       .addCase(getRestaurants.fulfilled, (state, { payload }) => {
         state.requestRestaurantsStatus = REQUEST_STATUS.FULFILLED;
-        state.ids = payload.map(({ id }) => id);
-        state.entities = payload.reduce((acc, restaurant) => {
-          acc[restaurant.id] = restaurant;
-
-          return acc;
-        }, {});
+        entityAdapter.setAll(state, payload);
       })
       .addCase(getRestaurant.pending, (state, { meta }) => {
         state.requestStatusById[meta.arg] = REQUEST_STATUS.PENDING;
@@ -43,17 +36,17 @@ export const restaurantsSlice = createSlice({
         state.requestStatusById[meta.arg] = REQUEST_STATUS.REJECTED;
       })
       .addCase(getRestaurant.fulfilled, (state, { payload }) => {
-        state.entities[payload.id] = payload;
+        entityAdapter.addOne(state, payload)
         state.requestStatusById[payload.id] = REQUEST_STATUS.FULFILLED;
-        if (!state.ids.includes(payload.id)) {
-          state.ids.push(payload.id);
-        }
       }),
 });
 
 export const {
-  selectRestaurantById,
-  selectRestaurantsIds,
   selectRequestStatus,
-  selectRequestStatusById
+  selectRequestStatusById,
 } = restaurantsSlice.selectors;
+
+export const {
+    selectById: selectRestaurantById,
+  selectIds: selectRestaurantsIds,
+} = entityAdapter.getSelectors((state) => state.restaurants)
