@@ -15,14 +15,12 @@ export const dishesSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getDishes.pending, (state, { meta }) => {
-        console.log('pending')
         state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.PENDING;
       })
       .addCase(getDishes.rejected, (state, { meta }) => {
         state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.REJECTED;
       })
       .addCase(getDishes.fulfilled, (state, { payload }) => {
-        console.log('fulldiled::', payload)
         entityAdapter.upsertMany(state, payload.dishes);
         state.requestStatusByRestaurantId[payload.restaurantId] = REQUEST_STATUS.FULFILLED;
       }),
