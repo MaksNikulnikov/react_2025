@@ -1,0 +1,13 @@
+.userInfo {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.3rem;
+}
+
+.name {
+  color: #333;
+}
