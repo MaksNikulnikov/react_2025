@@ -28,7 +28,7 @@ export const MenuPage = () => {
     requestStatus === REQUEST_STATUS.IDLE ||
     requestStatus === REQUEST_STATUS.PENDING
   ) {
-    return <MenuPageSkeleton/>;
+    return <MenuPageSkeleton />;
   }
 
   if (!menuIds?.length) {
