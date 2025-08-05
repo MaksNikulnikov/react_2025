@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { getReviews } from "../../redux/entities/reviews/get-reviews";
 import { REQUEST_STATUS } from "../../redux/constants";
 import { ReviewPageSkeleton } from "./skeleton/ReviewPage.skeleton";
+import { getUsers } from "../../redux/entities/users/get-users";
+import { selectUsersRequestStatus } from "../../redux/entities/users/slice";
 
 export const ReviewsPage = () => {
   const dispatch = useDispatch();
@@ -16,19 +18,24 @@ export const ReviewsPage = () => {
   const { isLogged } = useUser();
   const { reviewsIds } = useOutletContext();
 
-  const requestStatus = useSelector((state) =>
+  const requestReviewsStatus = useSelector((state) =>
     selectReviewsRequestStatus(state, restaurantId)
   );
+
+  const requestUsersStatus = useSelector(selectUsersRequestStatus);
 
   useEffect(() => {
     if (restaurantId) {
       dispatch(getReviews(restaurantId));
+      dispatch(getUsers());
     }
   }, [dispatch, restaurantId]);
 
   if (
-    requestStatus === REQUEST_STATUS.IDLE ||
-    requestStatus === REQUEST_STATUS.PENDING
+    requestReviewsStatus === REQUEST_STATUS.IDLE ||
+    requestReviewsStatus === REQUEST_STATUS.PENDING ||
+    requestUsersStatus === REQUEST_STATUS.IDLE ||
+    requestUsersStatus === REQUEST_STATUS.PENDING
   ) {
     return <ReviewPageSkeleton />;
   }

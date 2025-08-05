@@ -1,22 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedUsers } from "../../../assets/normalized-mock";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getUsers } from "./get-users";
+import { REQUEST_STATUS } from "../../constants";
 
-const initialState = {
-  ids: normalizedUsers.map(({ id }) => id),
-  entities: normalizedUsers.reduce((acc, user) => {
-    acc[user.id] = user;
-
-    return acc;
-  }, {}),
-};
+const entityAdapter = createEntityAdapter();
+const initialState = entityAdapter.getInitialState({
+  requestStatus: REQUEST_STATUS.IDLE,
+});
 
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   selectors: {
-    selectUserById: (state, id) => state.entities[id],
-    selectUsersIds: (state) => state.ids,
+    selectUsersRequestStatus: (state) => state.requestStatus,
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getUsers.pending, (state) => {
+        state.requestStatus = REQUEST_STATUS.PENDING;
+      })
+      .addCase(getUsers.rejected, (state) => {
+        state.requestStatus = REQUEST_STATUS.REJECTED;
+      })
+      .addCase(getUsers.fulfilled, (state, { payload }) => {
+        entityAdapter.upsertMany(state, payload);
+        state.requestStatus = REQUEST_STATUS.FULFILLED;
+      }),
 });
 
-export const { selectUserById, selectUsersIds } = usersSlice.selectors;
+export const {
+  selectById: selectUserById,
+  selectIds: selectUsersIds,
+  selectAll: selectAllUsers,
+} = entityAdapter.getSelectors((state) => state.users);
+
+export const { selectUsersRequestStatus } = usersSlice.selectors;

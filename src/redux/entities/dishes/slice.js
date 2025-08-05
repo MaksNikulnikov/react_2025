@@ -57,8 +57,5 @@ export const selectDishesRequestStatus = (state, restaurantId) => {
 };
 
 export const selectDishRequestStatus = (state, dishId) => {
-  return (
-    state.dishes.requestStatusById[dishId] ||
-    REQUEST_STATUS.IDLE
-  );
+  return state.dishes.requestStatusById[dishId] || REQUEST_STATUS.IDLE;
 };
