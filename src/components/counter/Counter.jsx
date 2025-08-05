@@ -9,7 +9,7 @@ export const Counter = ({
   decrement,
 }) => {
   if (!increment || !decrement) {
-    return <DefaultCounter isDisabled={isDisabled} />;
+    return <DefaultCounter isDisabled={isDisabled} initial={value} max={100}/>;
   }
   return (
     <div className={styles.counter}>
