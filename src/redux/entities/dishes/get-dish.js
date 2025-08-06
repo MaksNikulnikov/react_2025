@@ -5,7 +5,7 @@ export const getDish = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     const response = await fetch(`http://localhost:3001/api/dish/${id}`);
     if (!response.ok) {
-      return rejectWithValue("Failed to fetch dishes");
+      return rejectWithValue("Failed to fetch dish");
     }
 
     const result = await response.json();

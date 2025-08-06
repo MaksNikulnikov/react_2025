@@ -11,7 +11,14 @@ const initialState = entityAdapter.getInitialState({
 export const reviewsSlice = createSlice({
   name: "reviews",
   initialState,
-  reducers: {},
+  selectors: {
+    selectReviewsRequestStatus: (state, restaurantId) => {
+      return (
+        state.requestStatusByRestaurantId[restaurantId] ||
+        REQUEST_STATUS.IDLE
+      );
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getReviews.pending, (state, { meta }) => {
@@ -27,19 +34,7 @@ export const reviewsSlice = createSlice({
       }),
 });
 
-export const {
-  selectById: selectReviewById,
-  selectIds: selectReviewsIds,
-  selectEntities,
-  selectAll: selectAllDishes,
-} = entityAdapter.getSelectors((state) => state.reviews);
+export const { selectById: selectReviewById, selectIds: selectReviewsIds } =
+  entityAdapter.getSelectors((state) => state.reviews);
 
-export const selectMultipleReviewsById = (state, ids) =>
-  ids.map((id) => selectReviewById(state, id));
-
-export const selectReviewsRequestStatus = (state, restaurantId) => {
-  return (
-    state.reviews.requestStatusByRestaurantId[restaurantId] ||
-    REQUEST_STATUS.IDLE
-  );
-};
+export const { selectReviewsRequestStatus } = reviewsSlice.selectors;
