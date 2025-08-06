@@ -1,5 +1,5 @@
 import { Counter } from "../counter/Counter";
-import { UserInfo } from "../user-info/UserInfo";
+import { UserInfoContainer } from "../user-info/UserInfo.container";
 import styles from "./review-list-item.module.css";
 
 export const ReviewListItem = ({ review }) => {
@@ -7,7 +7,7 @@ export const ReviewListItem = ({ review }) => {
     <li className={styles.reviewItem}>
       <p className={styles.reviewText}>{review.text}</p>
       <Counter value={review.rating}/>
-      <UserInfo userId={review.userId} />
+      <UserInfoContainer userId={review.userId} />
     </li>
   );
 };
