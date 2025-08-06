@@ -1,10 +1,6 @@
-import { useSelector } from "react-redux";
-import { selectUserById } from "../../redux/entities/users/slice";
-
 import styles from "./user-info.module.css";
 
-export const UserInfo = ({ userId }) => {
-  const user = useSelector((state) => selectUserById(state, userId));
+export const UserInfo = ({ user }) => { 
 
   return (
     <div className={styles.userInfo}>
