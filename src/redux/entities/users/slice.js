@@ -30,7 +30,6 @@ export const usersSlice = createSlice({
 export const {
   selectById: selectUserById,
   selectIds: selectUsersIds,
-  selectAll: selectAllUsers,
 } = entityAdapter.getSelectors((state) => state.users);
 
 export const { selectUsersRequestStatus } = usersSlice.selectors;

@@ -10,7 +10,7 @@ export const getRestaurants = createAsyncThunk(
     const result = await response.json();
 
     if (!result.length) {
-      rejectWithValue("no data");
+      rejectWithValue("Failed to fetch restaurants");
       return;
     }
 

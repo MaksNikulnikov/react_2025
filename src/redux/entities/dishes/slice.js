@@ -13,7 +13,19 @@ const initialState = entityAdapter.getInitialState({
 export const dishesSlice = createSlice({
   name: "dishes",
   initialState,
-  reducers: {},
+  selectors: {
+    selectMultipleDishesById: (state, ids) =>
+      ids.map((id) => state.entities.id === id),
+    selectDishesRequestStatus: (state, restaurantId) => {
+      return (
+        state.requestStatusByRestaurantId[restaurantId] ||
+        REQUEST_STATUS.IDLE
+      );
+    },
+    selectDishRequestStatus: (state, dishId) => {
+      return state.requestStatusById[dishId] || REQUEST_STATUS.IDLE;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getDishes.pending, (state, { meta }) => {
@@ -39,23 +51,11 @@ export const dishesSlice = createSlice({
       }),
 });
 
+export const { selectById: selectDishById, selectIds: selectDishesIds } =
+  entityAdapter.getSelectors((state) => state.dishes);
+
 export const {
-  selectById: selectDishById,
-  selectIds: selectDishesIds,
-  selectEntities,
-  selectAll: selectAllDishes,
-} = entityAdapter.getSelectors((state) => state.dishes);
-
-export const selectMultipleDishesById = (state, ids) =>
-  ids.map((id) => selectDishById(state, id));
-
-export const selectDishesRequestStatus = (state, restaurantId) => {
-  return (
-    state.dishes.requestStatusByRestaurantId[restaurantId] ||
-    REQUEST_STATUS.IDLE
-  );
-};
-
-export const selectDishRequestStatus = (state, dishId) => {
-  return state.dishes.requestStatusById[dishId] || REQUEST_STATUS.IDLE;
-};
+  selectMultipleDishesById,
+  selectDishesRequestStatus,
+  selectDishRequestStatus,
+} = dishesSlice.selectors;
