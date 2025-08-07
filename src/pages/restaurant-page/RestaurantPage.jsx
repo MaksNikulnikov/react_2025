@@ -1,17 +1,31 @@
 import { useParams, Outlet } from "react-router";
-import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../redux/entities/restoraunts/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRequestStatusById, selectRestaurantById } from "../../redux/entities/restaurants/slice";
 import styles from "./restaurant-page.module.css";
 import { TabLink } from "../../components/tab-link/TabLink";
+import { useEffect } from "react";
+import { getRestaurant } from "../../redux/entities/restaurants/get-restaurant";
+import { REQUEST_STATUS } from "../../redux/constants";
+import { RestaurantPageSkeleton } from "./skeleton/restaurant-page.skeleton";
 
 export const RestaurantPage = () => {
   const { restaurantId } = useParams();
+  const dispatch = useDispatch();
 
   const restaurant = useSelector((state) =>
     selectRestaurantById(state, restaurantId)
   );
 
-  if (!restaurant) return <p>Ресторан не найден</p>;
+  const requestStatus = useSelector((state) =>selectRequestStatusById(state, restaurantId));
+
+  useEffect(() => {
+    dispatch(getRestaurant(restaurantId));
+  }, [dispatch, restaurantId]);
+
+  if (requestStatus === REQUEST_STATUS.IDLE || requestStatus === REQUEST_STATUS.PENDING) 
+    return <RestaurantPageSkeleton/>
+  if (!restaurant)
+    return null
 
   return (
     <section className={styles.restaurant}>

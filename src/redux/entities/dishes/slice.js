@@ -1,26 +1,61 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { normalizedDishes } from "../../../assets/normalized-mock";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getDishes } from "./get-dishes";
+import { REQUEST_STATUS } from "../../constants";
+import { getDish } from "./get-dish";
 
-const initialState = {
-  ids: normalizedDishes.map(({ id }) => id),
-  entities: normalizedDishes.reduce((acc, dish) => {
-    acc[dish.id] = dish;
+const entityAdapter = createEntityAdapter();
 
-    return acc;
-  }, {}),
-};
+const initialState = entityAdapter.getInitialState({
+  requestStatusByRestaurantId: {},
+  requestStatusById: {},
+});
 
 export const dishesSlice = createSlice({
   name: "dishes",
   initialState,
   selectors: {
-    selectDishById: (state, id) => state.entities[id],
-    selectMultipleDishesById: (state, ids) => {
-      return ids.map((id) => state.entities[id]);
+    selectMultipleDishesById: (state, ids) =>
+      ids.map((id) => state.entities.id === id),
+    selectDishesRequestStatus: (state, restaurantId) => {
+      return (
+        state.requestStatusByRestaurantId[restaurantId] ||
+        REQUEST_STATUS.IDLE
+      );
     },
-    selectDishesIds: (state) => state.ids,
+    selectDishRequestStatus: (state, dishId) => {
+      return state.requestStatusById[dishId] || REQUEST_STATUS.IDLE;
+    },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getDishes.pending, (state, { meta }) => {
+        state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.PENDING;
+      })
+      .addCase(getDishes.rejected, (state, { meta }) => {
+        state.requestStatusByRestaurantId[meta.arg] = REQUEST_STATUS.REJECTED;
+      })
+      .addCase(getDishes.fulfilled, (state, { payload }) => {
+        entityAdapter.upsertMany(state, payload.dishes);
+        state.requestStatusByRestaurantId[payload.restaurantId] =
+          REQUEST_STATUS.FULFILLED;
+      })
+      .addCase(getDish.pending, (state, { meta }) => {
+        state.requestStatusById[meta.arg] = REQUEST_STATUS.PENDING;
+      })
+      .addCase(getDish.rejected, (state, { meta }) => {
+        state.requestStatusById[meta.arg] = REQUEST_STATUS.REJECTED;
+      })
+      .addCase(getDish.fulfilled, (state, { payload, meta }) => {
+        entityAdapter.upsertOne(state, payload);
+        state.requestStatusById[meta.arg] = REQUEST_STATUS.FULFILLED;
+      }),
 });
 
-export const { selectDishById, selectDishesIds, selectMultipleDishesById } =
-  dishesSlice.selectors;
+export const { selectById: selectDishById, selectIds: selectDishesIds } =
+  entityAdapter.getSelectors((state) => state.dishes);
+
+export const {
+  selectMultipleDishesById,
+  selectDishesRequestStatus,
+  selectDishRequestStatus,
+} = dishesSlice.selectors;
