@@ -1,0 +1,39 @@
+.skeleton {
+  padding: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  width: 12rem;
+  height: 3rem;
+  background: #ddd;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite ease-in-out;
+  margin-bottom: 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.tab {
+  width: 8rem;
+  height: 3rem;
+  background: #ddd;
+  border-radius: 6px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
