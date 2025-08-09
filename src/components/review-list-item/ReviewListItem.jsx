@@ -6,7 +6,7 @@ export const ReviewListItem = ({ review }) => {
   return (
     <li className={styles.reviewItem}>
       <p className={styles.reviewText}>{review.text}</p>
-      <Counter value={review.rating}/>
+      <Counter value={review.rating} />
       <UserInfoContainer userId={review.userId} />
     </li>
   );
