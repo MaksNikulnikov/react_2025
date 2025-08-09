@@ -1,15 +1,29 @@
 import { useForm } from "./useForm";
 import styles from "./review-form.module.css";
 import { Button } from "../button/Button";
+import { useCreateReviewMutation } from "../../redux/services/api";
+import { useParams } from "react-router";
 
 export const ReviewForm = () => {
+  const { restaurantId } = useParams();
   const { form, setName, setReview, setRating, clear } = useForm();
   const { name, review, rating } = form;
 
-  const handleSubmit = (e) => {
+  const [createReview, { isLoading }] = useCreateReviewMutation();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Отправка формы:", form);
+    try {
+      await createReview({
+        restaurantId,
+        body: { user: name, text: review, rating: Number(rating) },
+      }).unwrap();
+      clear();
+    } catch (err) {
+      console.error("Ошибка при отправке отзыва:", err);
+    }
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.field}>
@@ -56,7 +70,11 @@ export const ReviewForm = () => {
       </div>
       <div className={styles.actions}>
         <Button onClick={clear} name="Очистить" />
-        <Button type="submit" color="Blue" name="Отправить" />
+        <Button
+          type="submit"
+          color="Blue"
+          name={isLoading ? "Отправка..." : "Отправить"}
+        />
       </div>
     </form>
   );
