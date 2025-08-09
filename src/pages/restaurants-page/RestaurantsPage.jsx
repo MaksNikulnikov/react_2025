@@ -4,16 +4,11 @@ import { RestaurantsPageSkeleton } from "./skeleton/RestaurantsPage.skeleton";
 import { useGetRestaurantsQuery } from "../../redux/services/api";
 
 export const RestaurantsPage = () => {
-  const {data, isLoading, isError} = useGetRestaurantsQuery()
+  const { data, isLoading, isError } = useGetRestaurantsQuery();
 
-  console.log('data', data)
-
-  if (isLoading) 
-    return <RestaurantsPageSkeleton/>
-  if (isError)
-    return null
-  const restaurantsIds = data.map(entity=> entity.id)
-  console.log('restaurantsIsd', restaurantsIds)
+  if (isLoading) return <RestaurantsPageSkeleton />;
+  if (isError) return null;
+  const restaurantsIds = data.map((entity) => entity.id);
   return (
     <div className={styles.page}>
       <h1 className={styles.title}>Рестораны</h1>
