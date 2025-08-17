@@ -30,7 +30,10 @@ export const api = createApi({
 
     getReviewsByRestaurantId: builder.query({
       query: (restaurantId) => `/reviews?restaurantId=${restaurantId}`,
-      providesTags: ['Review'],
+      providesTags: (result, error, restaurantId) => [
+        { type: 'Review', id: 'LIST' },
+        { type: 'Restaurant', id: restaurantId },
+      ],
     }),
     createReview: builder.mutation({
       query: ({ restaurantId, body }) => ({
@@ -38,7 +41,10 @@ export const api = createApi({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Review'],
+      invalidatesTags: (result, error, { restaurantId }) => [
+        { type: 'Review', id: 'LIST' },
+        { type: 'Restaurant', id: restaurantId },
+      ],
     }),
     updateReview: builder.mutation({
       query: ({ reviewId, body }) => ({
@@ -48,6 +54,7 @@ export const api = createApi({
       }),
       invalidatesTags: (result, error, { reviewId }) => [
         { type: 'Review', id: reviewId },
+        { type: 'Review', id: 'LIST' },
       ],
     }),
 
