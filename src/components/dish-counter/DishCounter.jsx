@@ -1,4 +1,4 @@
-import { Counter } from "../counter/counter";
+import { Counter } from "../counter/Counter";
 import { useCounter } from "./use-counter";
 
 export const DishCounter = ({ dishId, isDisabled }) => {

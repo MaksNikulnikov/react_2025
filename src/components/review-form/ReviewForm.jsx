@@ -1,30 +1,66 @@
 import { useForm } from "./useForm";
 import styles from "./review-form.module.css";
 import { Button } from "../button/Button";
+import {
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+} from "../../redux/services/api";
+import { useParams } from "react-router";
 
-export const ReviewForm = () => {
-  const { form, setName, setReview, setRating, clear } = useForm();
+export const ReviewForm = ({ reviewData, handleUpdate }) => {
+  const isNewReview = !reviewData;
+  const { restaurantId } = useParams();
+  const { form, setName, setReview, setRating, clear } = useForm(reviewData);
   const { name, review, rating } = form;
+  const [createReview, { isLoading }] = useCreateReviewMutation();
+  const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
 
-  const handleSubmit = (e) => {
+  const handleCreateReview = async (e) => {
     e.preventDefault();
-    console.log("Отправка формы:", form);
+    try {
+      await createReview({
+        restaurantId,
+        body: { user: name, text: review, rating: Number(rating) },
+      }).unwrap();
+      clear();
+    } catch (err) {
+      console.error("Ошибка при отправке отзыва:", err);
+    }
+  };
+
+  const handleUpdateReview = async (e) => {
+    e.preventDefault();
+    try {
+      await updateReview({
+        reviewId: reviewData.id,
+        body: { text: review, rating: Number(rating) },
+      }).unwrap();
+      clear();
+      handleUpdate();
+    } catch (err) {
+      console.error("Ошибка при обновлении отзыва:", err);
+    }
   };
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="name">
-          Имя
-        </label>
-        <input
-          className={styles.input}
-          id="name"
-          type="text"
-          value={name}
-          placeholder="Введите ваше имя"
-          onChange={setName}
-        />
-      </div>
+    <form
+      className={styles.form}
+      onSubmit={isNewReview ? handleCreateReview : handleUpdateReview}
+    >
+      {isNewReview && (
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="name">
+            Имя
+          </label>
+          <input
+            className={styles.input}
+            id="name"
+            type="text"
+            value={name}
+            placeholder="Введите ваше имя"
+            onChange={setName}
+          />
+        </div>
+      )}
       <div className={styles.field}>
         <label className={styles.label} htmlFor="review">
           Отзыв
@@ -56,7 +92,19 @@ export const ReviewForm = () => {
       </div>
       <div className={styles.actions}>
         <Button onClick={clear} name="Очистить" />
-        <Button type="submit" color="Blue" name="Отправить" />
+        {isNewReview ? (
+          <Button
+            type="submit"
+            color="Blue"
+            name={isLoading ? "Отправка..." : "Отправить"}
+          />
+        ) : (
+          <Button
+            type="submit"
+            color="Blue"
+            name={isUpdating ? "Обновление..." : "Обновить"}
+          />
+        )}
       </div>
     </form>
   );

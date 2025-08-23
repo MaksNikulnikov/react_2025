@@ -1,17 +1,15 @@
-import { useSelector } from "react-redux";
-import { selectRestaurantById } from "../../redux/entities/restaurants/slice";
 import { RestaurantTab } from "./RestaurantTab";
+import { useGetRestaurantByIdQuery } from "../../redux/services/api";
 
-export const RestaurantsTabContainer = ({
-  restaurantId,
-}) => {
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId),
-  );
+export const RestaurantsTabContainer = ({ restaurantId }) => {
+  const {
+    data: restaurant,
+    isLoading,
+    isError,
+  } = useGetRestaurantByIdQuery(restaurantId);
 
-  return (
-    <RestaurantTab
-      restaurant={restaurant}
-    />
-  );
+  if (isLoading) return "...Loading";
+
+  if (isError) return null;
+  return <RestaurantTab restaurant={restaurant} />;
 };
