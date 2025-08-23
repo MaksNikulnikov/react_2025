@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer } from "react";
 
 const ACTION_TYPES = {
   SET_NAME: "SET_NAME",
@@ -32,14 +32,12 @@ const reducer = (state, action) => {
 };
 
 export const useForm = (reviewData) => {
-  const [form, dispatch] = useReducer(reducer, DEFAULT_STATE);
-
-  useEffect(() => {
-    if (reviewData) {
-      dispatch({ type: ACTION_TYPES.SET_ALL, payload: reviewData });
-    }
-  }, [reviewData]);
-
+  const initialState = {
+    name: reviewData.name,
+    review: reviewData.text,
+    rating: reviewData.rating,
+  };
+  const [form, dispatch] = useReducer(reducer, initialState || DEFAULT_STATE);
   const setName = (e) =>
     dispatch({ type: ACTION_TYPES.SET_NAME, payload: e.target.value });
   const setReview = (e) =>

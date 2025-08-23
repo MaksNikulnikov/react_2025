@@ -1,4 +1,4 @@
-import styles from './restaurantPage.skeleton.module.css';
+import styles from "./restaurantPage.skeleton.module.css";
 
 export const RestaurantPageSkeleton = () => {
   return (

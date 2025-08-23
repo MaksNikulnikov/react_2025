@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
 import { useUser } from "../../components/user-context/use-user";
 import styles from "./reviews-page.module.css";
-import { ReviewListItem } from "../../components/review-list-item/ReviewListItem";
 import { ReviewForm } from "../../components/review-form/ReviewForm";
 import { ReviewPageSkeleton } from "./skeleton/ReviewPage.skeleton";
 import { useGetReviewsByRestaurantIdQuery } from "../../redux/services/api";
+import { ReviewListItemContainer } from "../../components/review-list-item/ReviewListItem.container";
 
 export const ReviewsPage = () => {
   const { restaurantId } = useParams();
@@ -29,7 +29,7 @@ export const ReviewsPage = () => {
       {reviews?.length ? (
         <ul className={styles.list}>
           {reviews.map((review) => (
-            <ReviewListItem key={review.id} review={review} />
+            <ReviewListItemContainer key={review.id} review={review} />
           ))}
         </ul>
       ) : (
