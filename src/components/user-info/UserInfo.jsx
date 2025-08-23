@@ -1,7 +1,6 @@
 import styles from "./user-info.module.css";
 
-export const UserInfo = ({ user }) => { 
-
+export const UserInfo = ({ user }) => {
   return (
     <div className={styles.userInfo}>
       <span className={styles.label}>Автор:</span>

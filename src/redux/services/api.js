@@ -1,67 +1,63 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001/api',
+    baseUrl: "http://localhost:3001/api",
   }),
-  tagTypes: ['Restaurant', 'Dish', 'Review', 'User'],
+  tagTypes: ["Restaurant", "Dish", "Review", "User"],
   endpoints: (builder) => ({
-
     getRestaurants: builder.query({
-      query: () => '/restaurants/',
-      providesTags: ['Restaurant'],
+      query: () => "/restaurants/",
+      providesTags: ["Restaurant"],
     }),
     getRestaurantById: builder.query({
       query: (restaurantId) => `/restaurant/${restaurantId}`,
-      providesTags: (result, error, id) => [{ type: 'Restaurant', id }],
+      providesTags: (result, error, id) => [{ type: "Restaurant", id }],
     }),
-
 
     getDishesByRestaurantId: builder.query({
       query: (restaurantId) => `/dishes?restaurantId=${restaurantId}`,
-      providesTags: ['Dish'],
+      providesTags: ["Dish"],
     }),
     getDishById: builder.query({
       query: (dishId) => `/dish/${dishId}`,
-      providesTags: (result, error, id) => [{ type: 'Dish', id }],
+      providesTags: (result, error, id) => [{ type: "Dish", id }],
     }),
-
 
     getReviewsByRestaurantId: builder.query({
       query: (restaurantId) => `/reviews?restaurantId=${restaurantId}`,
       providesTags: (result, error, restaurantId) => [
-        { type: 'Review', id: 'LIST' },
-        { type: 'Restaurant', id: restaurantId },
+        { type: "Review", id: "LIST" },
+        { type: "Restaurant", id: restaurantId },
       ],
     }),
     createReview: builder.mutation({
       query: ({ restaurantId, body }) => ({
         url: `/review/${restaurantId}`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
       invalidatesTags: (result, error, { restaurantId }) => [
-        { type: 'Review', id: 'LIST' },
-        { type: 'Restaurant', id: restaurantId },
+        { type: "Review", id: "LIST" },
+        { type: "Restaurant", id: restaurantId },
       ],
     }),
     updateReview: builder.mutation({
       query: ({ reviewId, body }) => ({
         url: `/review/${reviewId}`,
-        method: 'PATCH',
+        method: "PATCH",
         body,
       }),
       invalidatesTags: (result, error, { reviewId }) => [
-        { type: 'Review', id: reviewId },
-        { type: 'Review', id: 'LIST' },
+        { type: "Review", id: reviewId },
+        { type: "Review", id: "LIST" },
       ],
     }),
 
-
     getUsers: builder.query({
-      query: () => '/users/',
-      providesTags: ['User'],
+      query: () => "/users/",
+      providesTags: ["User"],
     }),
   }),
 });

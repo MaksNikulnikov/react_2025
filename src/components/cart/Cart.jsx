@@ -11,7 +11,9 @@ export const Cart = () => {
 
   return (
     <div>
-      {cartEntries.map(([id, amount]) => <CartItemContainer key={id} id={id} amount={amount}/>)}
+      {cartEntries.map(([id, amount]) => (
+        <CartItemContainer key={id} id={id} amount={amount} />
+      ))}
     </div>
   );
 };

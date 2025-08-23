@@ -12,7 +12,6 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
   const { restaurantId } = useParams();
   const { form, setName, setReview, setRating, clear } = useForm(reviewData);
   const { name, review, rating } = form;
-
   const [createReview, { isLoading }] = useCreateReviewMutation();
   const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
 
