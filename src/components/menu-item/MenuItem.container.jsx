@@ -1,8 +1,10 @@
-import { useSelector } from "react-redux";
-import { selectDishById } from "../../redux/entities/dishes/slice";
 import { MenuItem } from "./MenuItem";
+import { useGetDishByIdQuery } from "../../redux/services/api";
 
 export const MenuItemContainer = ({ menuItemId }) => {
-  const dish = useSelector((state) => selectDishById(state, menuItemId));
+  const { data: dish, isLoading, isError } = useGetDishByIdQuery(menuItemId);
+  if (isLoading) return "...Loading";
+
+  if (isError) return null;
   return <MenuItem dish={dish} />;
 };

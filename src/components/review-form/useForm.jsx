@@ -1,16 +1,19 @@
 import { useReducer } from "react";
-const DEFAULT_STATE = {
-  name: "",
-  review: "",
-  rating: 1,
-};
 
 const ACTION_TYPES = {
   SET_NAME: "SET_NAME",
   SET_REVIEW: "SET_REVIEW",
   SET_RATING: "SET_RATING",
+  SET_ALL: "SET_ALL",
   CLEAR_FORM: "CLEAR_FORM",
 };
+
+const DEFAULT_STATE = {
+  name: "",
+  review: "",
+  rating: 0,
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTION_TYPES.SET_NAME:
@@ -19,6 +22,8 @@ const reducer = (state, action) => {
       return { ...state, review: action.payload };
     case ACTION_TYPES.SET_RATING:
       return { ...state, rating: action.payload };
+    case ACTION_TYPES.SET_ALL:
+      return { ...state, review: action.payload.text };
     case ACTION_TYPES.CLEAR_FORM:
       return DEFAULT_STATE;
     default:
@@ -26,9 +31,13 @@ const reducer = (state, action) => {
   }
 };
 
-export const useForm = () => {
-  const [form, dispatch] = useReducer(reducer, DEFAULT_STATE);
-
+export const useForm = (reviewData) => {
+  const initialState = {
+    name: reviewData.name,
+    review: reviewData.text,
+    rating: reviewData.rating,
+  };
+  const [form, dispatch] = useReducer(reducer, initialState || DEFAULT_STATE);
   const setName = (e) =>
     dispatch({ type: ACTION_TYPES.SET_NAME, payload: e.target.value });
   const setReview = (e) =>
@@ -36,11 +45,8 @@ export const useForm = () => {
   const setRating = (e) =>
     dispatch({ type: ACTION_TYPES.SET_RATING, payload: e.target.value });
   const clear = () => dispatch({ type: ACTION_TYPES.CLEAR_FORM });
-  return {
-    form,
-    setName,
-    setReview,
-    setRating,
-    clear,
-  };
+  const setAll = (values) =>
+    dispatch({ type: ACTION_TYPES.SET_ALL, payload: values });
+
+  return { form, setName, setReview, setRating, clear, setAll };
 };
