@@ -1,7 +1,7 @@
 {
   "name": "simple_api",
   "version": "0.0.1",
-  "description": "core",
+  "description": "Local Express mock API for Restaurant Explorer.",
   "scripts": {
     "start": "supervisor server.js"
   },
