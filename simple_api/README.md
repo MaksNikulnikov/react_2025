@@ -1,21 +1,30 @@
-# API
+# Mock API
 
-## Ресторан
+This folder contains the local Express API used by the frontend during development.
 
-1. GET /api/restaurants/ - все рестораны;
-2. GET /api/restaurant/:restaurantId - ресторан по айдишки (/api/restaurant/d32n32d8huasj );
+## Endpoints
 
-## Блюда
+### Restaurants
 
-1. GET /api/dishes?restaurantId=:restaurantId - получить блюда по айди ресторана (/api/dishes?restaurantId=d32n32d8huasj)
-2. GET /api/dish/:dishId - блюдо по айдишки (/api/dish/djshfusdhfi29 )
+1. `GET /api/restaurants` returns all restaurants.
+2. `GET /api/restaurant/:restaurantId` returns one restaurant by id.
 
-## Отзывы
+### Dishes
 
-1. GET /api/reviews?restaurantId=:restaurantId - получить отзывы по айди ресторана (/api/reviews?restaurantId=d32n32d8huasj)
-2. POST /api/review/:restaurantId - создать отзыв по айди ресторана (/api/review/d32n32d8huasj, а в бади сам отзыв без айдишки)
-3. PATCH /api/review/:reviewId - изменить отзыв по айди ресторана (/api/review/d32n32d8huasj, а в бади сам отзыв без айдишки)
+1. `GET /api/dishes?restaurantId=:restaurantId` returns dishes for a specific restaurant.
+2. `GET /api/dish/:dishId` returns one dish by id.
 
-## Пользователи
+### Reviews
 
-1. GET /api/users/ - все пользователи;
+1. `GET /api/reviews?restaurantId=:restaurantId` returns reviews for a specific restaurant.
+2. `POST /api/review/:restaurantId` creates a new review for a restaurant.
+3. `PATCH /api/review/:reviewId` updates an existing review.
+
+### Users
+
+1. `GET /api/users` returns all users.
+
+## Notes
+
+- Data is stored in local mock files.
+- Created and updated reviews are kept in memory and reset after a server restart.

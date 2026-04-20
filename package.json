@@ -1,7 +1,8 @@
 {
-  "name": "vite-project",
+  "name": "restaurant-explorer",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Portfolio React application for browsing restaurants, menus, reviews, and a demo cart flow.",
   "type": "module",
   "scripts": {
     "dev": "vite",
