@@ -7,10 +7,11 @@ import reactRefresh from "eslint-plugin-react-refresh";
 export default [
   { ignores: ["dist"] },
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["src/**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      sourceType: "module",
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
@@ -34,6 +35,33 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": 0,
+    },
+  },
+  {
+    files: ["eslint.config.js", "vite.config.js", "scripts/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.node,
+      sourceType: "module",
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
+    },
+  },
+  {
+    files: ["simple_api/**/*.js"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.node,
+      sourceType: "commonjs",
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      "no-unused-vars": [
+        "error",
+        { varsIgnorePattern: "^[A-Z_]", argsIgnorePattern: "^_" },
+      ],
     },
   },
 ];

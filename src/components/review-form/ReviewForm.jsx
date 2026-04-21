@@ -6,30 +6,34 @@ import {
   useUpdateReviewMutation,
 } from "../../redux/services/api";
 import { useParams } from "react-router";
+import { useUser } from "../user-context/use-user";
 
 export const ReviewForm = ({ reviewData, handleUpdate }) => {
   const isNewReview = !reviewData;
   const { restaurantId } = useParams();
-  const { form, setName, setReview, setRating, clear } = useForm(reviewData);
-  const { name, review, rating } = form;
+  const { userId, userName } = useUser();
+  const { form, setReview, setRating, clear } = useForm(reviewData);
+  const { review, rating } = form;
   const [createReview, { isLoading }] = useCreateReviewMutation();
   const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
 
   const handleCreateReview = async (e) => {
     e.preventDefault();
+
     try {
       await createReview({
         restaurantId,
-        body: { user: name, text: review, rating: Number(rating) },
+        body: { userId, text: review, rating: Number(rating) },
       }).unwrap();
       clear();
     } catch (err) {
-      console.error("Ошибка при отправке отзыва:", err);
+      console.error("Failed to submit review:", err);
     }
   };
 
   const handleUpdateReview = async (e) => {
     e.preventDefault();
+
     try {
       await updateReview({
         reviewId: reviewData.id,
@@ -38,44 +42,35 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       clear();
       handleUpdate();
     } catch (err) {
-      console.error("Ошибка при обновлении отзыва:", err);
+      console.error("Failed to update review:", err);
     }
   };
+
   return (
     <form
       className={styles.form}
       onSubmit={isNewReview ? handleCreateReview : handleUpdateReview}
     >
-      {isNewReview && (
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="name">
-            Имя
-          </label>
-          <input
-            className={styles.input}
-            id="name"
-            type="text"
-            value={name}
-            placeholder="Введите ваше имя"
-            onChange={setName}
-          />
-        </div>
-      )}
+      {isNewReview ? (
+        <p className={styles.hint}>Posting as {userName}</p>
+      ) : null}
+
       <div className={styles.field}>
         <label className={styles.label} htmlFor="review">
-          Отзыв
+          Review
         </label>
         <textarea
           className={styles.textarea}
           id="review"
           value={review}
-          placeholder="Введите ваш отзыв"
+          placeholder="Share your impression"
           onChange={setReview}
         ></textarea>
       </div>
+
       <div className={styles.field}>
         <label className={styles.label} htmlFor="rating">
-          Рейтинг
+          Rating
         </label>
         <select
           className={styles.select}
@@ -90,19 +85,20 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
           ))}
         </select>
       </div>
+
       <div className={styles.actions}>
-        <Button onClick={clear} name="Очистить" />
+        <Button onClick={clear} name="Clear" />
         {isNewReview ? (
           <Button
             type="submit"
             color="Blue"
-            name={isLoading ? "Отправка..." : "Отправить"}
+            name={isLoading ? "Submitting..." : "Submit review"}
           />
         ) : (
           <Button
             type="submit"
             color="Blue"
-            name={isUpdating ? "Обновление..." : "Обновить"}
+            name={isUpdating ? "Updating..." : "Update review"}
           />
         )}
       </div>

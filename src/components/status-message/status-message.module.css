@@ -1,0 +1,51 @@
+.message {
+  display: block;
+  padding: 1rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  line-height: 1.6;
+}
+
+.compact {
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+.title,
+.text {
+  display: block;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.text {
+  margin-top: 0.2rem;
+  opacity: 0.88;
+}
+
+.neutral {
+  background-color: #f4f7fb;
+  border-color: #d9e3ee;
+  color: #314254;
+}
+
+.loading {
+  background-color: #fff5eb;
+  border-color: #f2d5b8;
+  color: #7a471f;
+}
+
+.empty {
+  background-color: #f7f8fa;
+  border-color: #dee4eb;
+  color: #526374;
+}
+
+.error {
+  background-color: #fff1ef;
+  border-color: #f3c5bc;
+  color: #8e3424;
+}

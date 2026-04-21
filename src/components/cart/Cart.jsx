@@ -1,12 +1,17 @@
 import { useSelector } from "react-redux";
 import { CartItemContainer } from "../cart-item/CartItem.container";
+import { StatusMessage } from "../status-message/StatusMessage";
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const cartEntries = Object.entries(cart);
 
   if (cartEntries.length === 0) {
-    return <div>no items</div>;
+    return (
+      <StatusMessage tone="empty" title="Your cart is empty.">
+        Add dishes from the menu to review them here.
+      </StatusMessage>
+    );
   }
 
   return (
