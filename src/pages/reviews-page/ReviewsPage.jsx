@@ -9,12 +9,14 @@ import { StatusMessage } from "../../components/status-message/StatusMessage";
 
 export const ReviewsPage = () => {
   const { restaurantId } = useParams();
-  const { isLogged } = useUser();
+  const { isLogged, userId } = useUser();
   const {
     data: reviews,
     isLoading,
     isError,
   } = useGetReviewsByRestaurantIdQuery(restaurantId);
+
+  const ownReview = reviews?.find((review) => review.userId === userId);
 
   if (isLoading) {
     return <ReviewPageSkeleton />;
@@ -46,7 +48,19 @@ export const ReviewsPage = () => {
           Be the first to share an impression.
         </StatusMessage>
       )}
-      {isLogged && <ReviewForm />}
+      {isLogged && !isError ? (
+        ownReview ? (
+          <StatusMessage
+            className={styles.message}
+            tone="neutral"
+            title="You already reviewed this restaurant."
+          >
+            Use the Edit review button on your review card to update it.
+          </StatusMessage>
+        ) : (
+          <ReviewForm />
+        )
+      ) : null}
     </section>
   );
 };

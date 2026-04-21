@@ -62,18 +62,45 @@ router.post("/review/:restaurantId", (req, res) => {
   const body = req.body;
   const restaurantId = req.params?.restaurantId;
   const restaurant = restaurantId && getById(restaurants)(restaurantId);
-  let newReview = {};
+  const reviewAuthor = body?.userId && getById(users)(body.userId);
 
-  if (restaurant && body) {
-    const newReviewId = nanoid();
-
-    newReview = {
-      ...body,
-      id: newReviewId,
-    };
-    restaurant.reviews.push(newReviewId);
-    reviews.push(newReview);
+  if (!restaurant) {
+    reply(res, { message: "Restaurant not found." }, 1000, 404);
+    return;
   }
+
+  if (!body?.userId || !body?.text) {
+    reply(res, { message: "Review text and user are required." }, 1000, 400);
+    return;
+  }
+
+  if (!reviewAuthor) {
+    reply(res, { message: "Selected user does not exist." }, 1000, 400);
+    return;
+  }
+
+  const hasExistingReview = restaurant.reviews
+    .map(getById(reviews))
+    .some((review) => review?.userId === body.userId);
+
+  if (hasExistingReview) {
+    reply(
+      res,
+      { message: "This user already has a review for the restaurant." },
+      1000,
+      409,
+    );
+    return;
+  }
+
+  const newReviewId = nanoid();
+  const newReview = {
+    ...body,
+    id: newReviewId,
+  };
+
+  restaurant.reviews.push(newReviewId);
+  reviews.push(newReview);
 
   reply(res, newReview);
 });
@@ -81,11 +108,19 @@ router.post("/review/:restaurantId", (req, res) => {
 router.patch("/review/:reviewId", (req, res) => {
   const body = req.body;
   const reviewId = req.params?.reviewId;
-  let updatedReview;
+  const review = reviewId && getById(reviews)(reviewId);
 
-  if (reviewId) {
-    updatedReview = updateById(reviews)(reviewId, body);
+  if (!reviewId || !body) {
+    reply(res, { message: "Review update payload is required." }, 1000, 400);
+    return;
   }
+
+  if (!review) {
+    reply(res, { message: "Review not found." }, 1000, 404);
+    return;
+  }
+
+  const updatedReview = updateById(reviews)(reviewId, body);
 
   reply(res, updatedReview);
 });

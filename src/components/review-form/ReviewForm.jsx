@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "./useForm";
 import styles from "./review-form.module.css";
 import { Button } from "../button/Button";
@@ -7,6 +8,7 @@ import {
 } from "../../redux/services/api";
 import { useParams } from "react-router";
 import { useUser } from "../user-context/use-user";
+import { StatusMessage } from "../status-message/StatusMessage";
 
 export const ReviewForm = ({ reviewData, handleUpdate }) => {
   const isNewReview = !reviewData;
@@ -16,9 +18,24 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
   const { review, rating } = form;
   const [createReview, { isLoading }] = useCreateReviewMutation();
   const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
+  const [submitError, setSubmitError] = useState("");
+
+  const getErrorMessage = (error, fallbackMessage) =>
+    error?.data?.message || fallbackMessage;
+
+  const handleClear = () => {
+    setSubmitError("");
+    clear();
+  };
 
   const handleCreateReview = async (e) => {
     e.preventDefault();
+    setSubmitError("");
+
+    if (!userId) {
+      setSubmitError("Choose a demo user before leaving a review.");
+      return;
+    }
 
     try {
       await createReview({
@@ -27,22 +44,26 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       }).unwrap();
       clear();
     } catch (err) {
-      console.error("Failed to submit review:", err);
+      setSubmitError(
+        getErrorMessage(err, "Unable to submit the review right now."),
+      );
     }
   };
 
   const handleUpdateReview = async (e) => {
     e.preventDefault();
+    setSubmitError("");
 
     try {
       await updateReview({
         reviewId: reviewData.id,
         body: { text: review, rating: Number(rating) },
       }).unwrap();
-      clear();
       handleUpdate();
     } catch (err) {
-      console.error("Failed to update review:", err);
+      setSubmitError(
+        getErrorMessage(err, "Unable to update the review right now."),
+      );
     }
   };
 
@@ -53,6 +74,10 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
     >
       {isNewReview ? (
         <p className={styles.hint}>Posting as {userName}</p>
+      ) : null}
+
+      {submitError ? (
+        <StatusMessage tone="error" compact title={submitError} />
       ) : null}
 
       <div className={styles.field}>
@@ -87,7 +112,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       </div>
 
       <div className={styles.actions}>
-        <Button onClick={clear} name="Clear" />
+        <Button onClick={handleClear} name="Clear" />
         {isNewReview ? (
           <Button
             type="submit"
