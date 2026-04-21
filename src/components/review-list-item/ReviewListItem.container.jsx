@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUser } from "../user-context/use-user";
 import { ReviewListItem } from "./ReviewListItem";
 import { useGetUsersQuery } from "../../redux/services/api";
+import { StatusMessage } from "../status-message/StatusMessage";
 
 export const ReviewListItemContainer = ({ review }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -9,8 +10,19 @@ export const ReviewListItemContainer = ({ review }) => {
   const CURRENT_USER_ID = "mock-user-id";
   const { data, isLoading, isError } = useGetUsersQuery();
 
-  if (isLoading) return "...Loading";
-  if (isError) return null;
+  if (isLoading) {
+    return (
+      <StatusMessage as="li" tone="loading" compact title="Loading author..." />
+    );
+  }
+
+  if (isError) {
+    return (
+      <StatusMessage as="li" tone="error" compact title="Author unavailable.">
+        Review details are temporarily incomplete.
+      </StatusMessage>
+    );
+  }
 
   const user = data.find((user) => user.id === userId);
 

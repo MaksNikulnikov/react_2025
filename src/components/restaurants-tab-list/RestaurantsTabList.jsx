@@ -1,4 +1,5 @@
 import { RestaurantsTabContainer } from "../restaurant-tab/RestaurantTab.container";
+import { StatusMessage } from "../status-message/StatusMessage";
 import styles from "./restaurants-tab-list.module.css";
 
 export const RestaurantsTabList = ({ restaurantsIds }) => {
@@ -14,7 +15,11 @@ export const RestaurantsTabList = ({ restaurantsIds }) => {
           ))}
         </nav>
       ) : (
-        <p className={styles.message}>Рестораны отсутствуют</p>
+        <StatusMessage
+          className={styles.message}
+          tone="empty"
+          title="No restaurants available yet."
+        />
       )}
     </>
   );

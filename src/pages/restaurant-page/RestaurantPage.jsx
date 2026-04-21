@@ -4,6 +4,7 @@ import { TabLink } from "../../components/tab-link/TabLink";
 
 import { RestaurantPageSkeleton } from "./skeleton/restaurant-page.skeleton";
 import { useGetRestaurantByIdQuery } from "../../redux/services/api";
+import { StatusMessage } from "../../components/status-message/StatusMessage";
 
 export const RestaurantPage = () => {
   const { restaurantId } = useParams();
@@ -15,15 +16,23 @@ export const RestaurantPage = () => {
 
   if (isLoading) return <RestaurantPageSkeleton />;
 
-  if (isError) return null;
+  if (isError) {
+    return (
+      <section className={styles.restaurant}>
+        <StatusMessage tone="error" title="Restaurant unavailable.">
+          Return to the restaurant list and try another page.
+        </StatusMessage>
+      </section>
+    );
+  }
 
   return (
     <section className={styles.restaurant}>
       <h2>{restaurant.name}</h2>
 
       <nav className={styles.tabs}>
-        <TabLink to="menu">Меню</TabLink>
-        <TabLink to="reviews">Отзывы</TabLink>
+        <TabLink to="menu">Menu</TabLink>
+        <TabLink to="reviews">Reviews</TabLink>
       </nav>
 
       <div className={styles.content}>

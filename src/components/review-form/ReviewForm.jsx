@@ -24,7 +24,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       }).unwrap();
       clear();
     } catch (err) {
-      console.error("Ошибка при отправке отзыва:", err);
+      console.error("Failed to submit review:", err);
     }
   };
 
@@ -38,9 +38,10 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       clear();
       handleUpdate();
     } catch (err) {
-      console.error("Ошибка при обновлении отзыва:", err);
+      console.error("Failed to update review:", err);
     }
   };
+
   return (
     <form
       className={styles.form}
@@ -49,33 +50,33 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       {isNewReview && (
         <div className={styles.field}>
           <label className={styles.label} htmlFor="name">
-            Имя
+            Name
           </label>
           <input
             className={styles.input}
             id="name"
             type="text"
             value={name}
-            placeholder="Введите ваше имя"
+            placeholder="Enter your name"
             onChange={setName}
           />
         </div>
       )}
       <div className={styles.field}>
         <label className={styles.label} htmlFor="review">
-          Отзыв
+          Review
         </label>
         <textarea
           className={styles.textarea}
           id="review"
           value={review}
-          placeholder="Введите ваш отзыв"
+          placeholder="Share your impression"
           onChange={setReview}
         ></textarea>
       </div>
       <div className={styles.field}>
         <label className={styles.label} htmlFor="rating">
-          Рейтинг
+          Rating
         </label>
         <select
           className={styles.select}
@@ -91,18 +92,18 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
         </select>
       </div>
       <div className={styles.actions}>
-        <Button onClick={clear} name="Очистить" />
+        <Button onClick={clear} name="Clear" />
         {isNewReview ? (
           <Button
             type="submit"
             color="Blue"
-            name={isLoading ? "Отправка..." : "Отправить"}
+            name={isLoading ? "Submitting..." : "Submit review"}
           />
         ) : (
           <Button
             type="submit"
             color="Blue"
-            name={isUpdating ? "Обновление..." : "Обновить"}
+            name={isUpdating ? "Updating..." : "Update review"}
           />
         )}
       </div>
