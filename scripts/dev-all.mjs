@@ -8,7 +8,7 @@ const commands = [
   },
   {
     label: "web",
-    args: ["run", "dev"],
+    args: ["run", "dev", "--", "--host", "127.0.0.1"],
   },
 ];
 
