@@ -3,12 +3,12 @@ const { nanoid } = require("nanoid");
 const { restaurants, products, reviews, users } = require("./mock");
 const { reply, getById, updateById } = require("./utils");
 
-router.get("/restaurants", (req, res, next) => {
+router.get("/restaurants", (_req, res) => {
   console.log("request");
   reply(res, restaurants);
 });
 
-router.get("/restaurant/:restaurantId", (req, res, next) => {
+router.get("/restaurant/:restaurantId", (req, res) => {
   const restaurantId = req.params?.restaurantId;
   let restaurant;
 
@@ -19,7 +19,7 @@ router.get("/restaurant/:restaurantId", (req, res, next) => {
   reply(res, restaurant);
 });
 
-router.get("/dishes", (req, res, next) => {
+router.get("/dishes", (req, res) => {
   const { restaurantId, dishId } = req.query;
   let result = products;
 
@@ -36,7 +36,7 @@ router.get("/dishes", (req, res, next) => {
   reply(res, result);
 });
 
-router.get("/dish/:dishId", (req, res, next) => {
+router.get("/dish/:dishId", (req, res) => {
   const dishId = req.params?.dishId;
   let product;
 
@@ -46,7 +46,7 @@ router.get("/dish/:dishId", (req, res, next) => {
   reply(res, product);
 });
 
-router.get("/reviews", (req, res, next) => {
+router.get("/reviews", (req, res) => {
   const { restaurantId } = req.query;
   let result = reviews;
   if (restaurantId) {
@@ -58,7 +58,7 @@ router.get("/reviews", (req, res, next) => {
   reply(res, result);
 });
 
-router.post("/review/:restaurantId", (req, res, next) => {
+router.post("/review/:restaurantId", (req, res) => {
   const body = req.body;
   const restaurantId = req.params?.restaurantId;
   const restaurant = restaurantId && getById(restaurants)(restaurantId);
@@ -78,7 +78,7 @@ router.post("/review/:restaurantId", (req, res, next) => {
   reply(res, newReview);
 });
 
-router.patch("/review/:reviewId", (req, res, next) => {
+router.patch("/review/:reviewId", (req, res) => {
   const body = req.body;
   const reviewId = req.params?.reviewId;
   let updatedReview;
@@ -90,7 +90,7 @@ router.patch("/review/:reviewId", (req, res, next) => {
   reply(res, updatedReview);
 });
 
-router.get("/users", (req, res, next) => {
+router.get("/users", (_req, res) => {
   reply(res, users);
 });
 

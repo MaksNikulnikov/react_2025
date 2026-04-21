@@ -6,11 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:all": "node scripts/dev-all.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "prettier": "npx prettier --write .",
     "preview": "vite preview",
-    "server": "node simple_api/server.js"
+    "server": "npm --prefix simple_api start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
