@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { StatusMessage } from "../status-message/StatusMessage";
 
 export class ErrorBoundary extends Component {
   constructor(props) {
@@ -11,12 +12,17 @@ export class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.log(error, errorInfo);
+    console.error(error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>something went wrong</h1>;
+      return (
+        <StatusMessage tone="error" title="Something went wrong.">
+          Reload the page or restart the local API server if the issue
+          persists.
+        </StatusMessage>
+      );
     }
 
     return this.props.children;
