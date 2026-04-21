@@ -98,6 +98,7 @@ By default, Vite starts the app on `http://localhost:5173`.
 - `npm run build` creates a production build
 - `npm run preview` previews the production build locally
 - `npm run lint` runs ESLint across the frontend, tooling files, and mock API
+- `npm run test` runs the current automated checks for review validation rules
 - `npm run server` starts the local mock API
 
 ## API Overview
@@ -119,4 +120,5 @@ Main endpoints:
 
 - The API uses mock data stored locally in `simple_api/api/mock.js`.
 - Review changes are stored in memory and reset after restarting the API server.
+- A small automated test suite covers the review validation rules in `simple_api/api/review-rules.test.js`.
 - This repository is focused on frontend architecture and state flow rather than backend persistence.

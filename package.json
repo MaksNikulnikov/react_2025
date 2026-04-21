@@ -9,6 +9,7 @@
     "dev:all": "node scripts/dev-all.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "npm run test --prefix simple_api",
     "prettier": "npx prettier --write .",
     "preview": "vite preview",
     "server": "npm --prefix simple_api start"

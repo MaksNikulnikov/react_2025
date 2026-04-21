@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Local Express mock API for Restaurant Explorer.",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test --experimental-test-isolation=none api/*.test.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { nanoid } = require("nanoid");
 const { restaurants, products, reviews, users } = require("./mock");
 const { reply, getById, updateById } = require("./utils");
+const { findCreateReviewError } = require("./review-rules");
 
 router.get("/restaurants", (_req, res) => {
   reply(res, restaurants);
@@ -61,34 +62,15 @@ router.post("/review/:restaurantId", (req, res) => {
   const body = req.body;
   const restaurantId = req.params?.restaurantId;
   const restaurant = restaurantId && getById(restaurants)(restaurantId);
-  const reviewAuthor = body?.userId && getById(users)(body.userId);
+  const createReviewError = findCreateReviewError({
+    restaurant,
+    reviews,
+    users,
+    body,
+  });
 
-  if (!restaurant) {
-    reply(res, { message: "Restaurant not found." }, 1000, 404);
-    return;
-  }
-
-  if (!body?.userId || !body?.text) {
-    reply(res, { message: "Review text and user are required." }, 1000, 400);
-    return;
-  }
-
-  if (!reviewAuthor) {
-    reply(res, { message: "Selected user does not exist." }, 1000, 400);
-    return;
-  }
-
-  const hasExistingReview = restaurant.reviews
-    .map(getById(reviews))
-    .some((review) => review?.userId === body.userId);
-
-  if (hasExistingReview) {
-    reply(
-      res,
-      { message: "This user already has a review for the restaurant." },
-      1000,
-      409,
-    );
+  if (createReviewError) {
+    reply(res, { message: createReviewError.message }, 1000, createReviewError.status);
     return;
   }
 
