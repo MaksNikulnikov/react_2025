@@ -7,7 +7,6 @@ import { StatusMessage } from "../status-message/StatusMessage";
 export const ReviewListItemContainer = ({ review }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const { userId } = useUser();
-  const CURRENT_USER_ID = "mock-user-id";
   const { data, isLoading, isError } = useGetUsersQuery();
 
   if (isLoading) {
@@ -24,7 +23,7 @@ export const ReviewListItemContainer = ({ review }) => {
     );
   }
 
-  const user = data.find((user) => user.id === userId);
+  const user = data.find((entry) => entry.id === review.userId);
 
   return (
     <ReviewListItem
@@ -32,7 +31,7 @@ export const ReviewListItemContainer = ({ review }) => {
       user={user}
       isFormVisible={isFormVisible}
       setIsFormVisible={setIsFormVisible}
-      isOwn={userId === CURRENT_USER_ID}
+      isOwn={userId === review.userId}
     />
   );
 };

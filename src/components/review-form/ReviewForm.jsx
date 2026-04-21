@@ -6,21 +6,24 @@ import {
   useUpdateReviewMutation,
 } from "../../redux/services/api";
 import { useParams } from "react-router";
+import { useUser } from "../user-context/use-user";
 
 export const ReviewForm = ({ reviewData, handleUpdate }) => {
   const isNewReview = !reviewData;
   const { restaurantId } = useParams();
-  const { form, setName, setReview, setRating, clear } = useForm(reviewData);
-  const { name, review, rating } = form;
+  const { userId, userName } = useUser();
+  const { form, setReview, setRating, clear } = useForm(reviewData);
+  const { review, rating } = form;
   const [createReview, { isLoading }] = useCreateReviewMutation();
   const [updateReview, { isLoading: isUpdating }] = useUpdateReviewMutation();
 
   const handleCreateReview = async (e) => {
     e.preventDefault();
+
     try {
       await createReview({
         restaurantId,
-        body: { user: name, text: review, rating: Number(rating) },
+        body: { userId, text: review, rating: Number(rating) },
       }).unwrap();
       clear();
     } catch (err) {
@@ -30,6 +33,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
 
   const handleUpdateReview = async (e) => {
     e.preventDefault();
+
     try {
       await updateReview({
         reviewId: reviewData.id,
@@ -47,21 +51,10 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       className={styles.form}
       onSubmit={isNewReview ? handleCreateReview : handleUpdateReview}
     >
-      {isNewReview && (
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="name">
-            Name
-          </label>
-          <input
-            className={styles.input}
-            id="name"
-            type="text"
-            value={name}
-            placeholder="Enter your name"
-            onChange={setName}
-          />
-        </div>
-      )}
+      {isNewReview ? (
+        <p className={styles.hint}>Posting as {userName}</p>
+      ) : null}
+
       <div className={styles.field}>
         <label className={styles.label} htmlFor="review">
           Review
@@ -74,6 +67,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
           onChange={setReview}
         ></textarea>
       </div>
+
       <div className={styles.field}>
         <label className={styles.label} htmlFor="rating">
           Rating
@@ -91,6 +85,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
           ))}
         </select>
       </div>
+
       <div className={styles.actions}>
         <Button onClick={clear} name="Clear" />
         {isNewReview ? (

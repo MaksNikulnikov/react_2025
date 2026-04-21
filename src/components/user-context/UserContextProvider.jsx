@@ -2,17 +2,19 @@ import { useState } from "react";
 import { UserContext } from "./userContext";
 
 export const UserContextProvider = ({ children }) => {
-  const [name, setName] = useState("");
-  const CURRENT_USER_ID = "mock-user-id";
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const logIn = (userName) => setName(userName);
-  const logOut = () => setName("");
-  const isLogged = name !== "";
-  const userId = CURRENT_USER_ID;
+  const logIn = (user) => setCurrentUser(user);
+  const logOut = () => setCurrentUser(null);
 
-  return (
-    <UserContext value={{ logIn, logOut, isLogged, userId }}>
-      {children}
-    </UserContext>
-  );
+  const value = {
+    currentUser,
+    logIn,
+    logOut,
+    isLogged: currentUser !== null,
+    userId: currentUser?.id ?? "",
+    userName: currentUser?.name ?? "",
+  };
+
+  return <UserContext value={value}>{children}</UserContext>;
 };
