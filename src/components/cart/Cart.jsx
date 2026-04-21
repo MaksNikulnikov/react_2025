@@ -9,7 +9,7 @@ export const Cart = () => {
   if (cartEntries.length === 0) {
     return (
       <StatusMessage tone="empty" title="Your cart is empty.">
-        Add dishes from the menu to review them here.
+        Add dishes from the menu to see them here.
       </StatusMessage>
     );
   }

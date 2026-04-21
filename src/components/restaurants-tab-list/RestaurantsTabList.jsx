@@ -1,4 +1,4 @@
-import { RestaurantsTabContainer } from "../restaurant-tab/RestaurantTab.container";
+import { RestaurantTabContainer } from "../restaurant-tab/RestaurantTab.container";
 import { StatusMessage } from "../status-message/StatusMessage";
 import styles from "./restaurants-tab-list.module.css";
 
@@ -8,7 +8,7 @@ export const RestaurantsTabList = ({ restaurantsIds }) => {
       {restaurantsIds.length ? (
         <nav className={styles.nav}>
           {restaurantsIds.map((restaurantId) => (
-            <RestaurantsTabContainer
+            <RestaurantTabContainer
               key={restaurantId}
               restaurantId={restaurantId}
             />

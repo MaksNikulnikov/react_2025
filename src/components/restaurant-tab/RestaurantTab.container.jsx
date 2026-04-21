@@ -2,7 +2,7 @@ import { RestaurantTab } from "./RestaurantTab";
 import { useGetRestaurantByIdQuery } from "../../redux/services/api";
 import { StatusMessage } from "../status-message/StatusMessage";
 
-export const RestaurantsTabContainer = ({ restaurantId }) => {
+export const RestaurantTabContainer = ({ restaurantId }) => {
   const {
     data: restaurant,
     isLoading,
@@ -22,6 +22,17 @@ export const RestaurantsTabContainer = ({ restaurantId }) => {
         tone="error"
         compact
         title="Unavailable"
+      />
+    );
+  }
+
+  if (!restaurant) {
+    return (
+      <StatusMessage
+        as="span"
+        tone="empty"
+        compact
+        title="Restaurant unavailable"
       />
     );
   }

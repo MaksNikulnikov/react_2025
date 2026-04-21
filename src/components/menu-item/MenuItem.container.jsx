@@ -19,5 +19,13 @@ export const MenuItemContainer = ({ menuItemId }) => {
     );
   }
 
+  if (!dish) {
+    return (
+      <StatusMessage as="li" tone="empty" compact title="Dish unavailable.">
+        The menu item no longer exists in the local dataset.
+      </StatusMessage>
+    );
+  }
+
   return <MenuItem dish={dish} />;
 };

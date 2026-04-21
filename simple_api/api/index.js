@@ -4,7 +4,6 @@ const { restaurants, products, reviews, users } = require("./mock");
 const { reply, getById, updateById } = require("./utils");
 
 router.get("/restaurants", (_req, res) => {
-  console.log("request");
   reply(res, restaurants);
 });
 
