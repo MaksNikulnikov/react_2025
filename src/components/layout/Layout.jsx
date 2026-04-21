@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { Header } from "../header/Header";
 import Scrollbar from "../scrollbar/Scrollbar";
-import styles from "./Layout.module.css";
+import styles from "./layout.module.css";
 
 export const Layout = () => {
   return (
