@@ -1,16 +1,16 @@
-import { RestaurantTabContainer } from "../restaurant-tab/RestaurantTab.container";
+import { RestaurantTab } from "../restaurant-tab/RestaurantTab";
 import { StatusMessage } from "../status-message/StatusMessage";
 import styles from "./restaurants-tab-list.module.css";
 
-export const RestaurantsTabList = ({ restaurantsIds }) => {
+export const RestaurantsTabList = ({ restaurants }) => {
   return (
     <>
-      {restaurantsIds.length ? (
-        <nav className={styles.nav}>
-          {restaurantsIds.map((restaurantId) => (
-            <RestaurantTabContainer
-              key={restaurantId}
-              restaurantId={restaurantId}
+      {restaurants.length ? (
+        <nav className={styles.grid} aria-label="Restaurant list">
+          {restaurants.map((restaurant) => (
+            <RestaurantTab
+              key={restaurant.id}
+              restaurant={restaurant}
             />
           ))}
         </nav>

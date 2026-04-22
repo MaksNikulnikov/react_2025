@@ -4,9 +4,9 @@ export const RestaurantsPageSkeleton = () => {
   return (
     <div className={styles.skeleton}>
       <div className={styles.title}></div>
-      <div className={styles.tabs}>
+      <div className={styles.cards}>
         {[...Array(3)].map((_, i) => (
-          <div key={i} className={styles.tab}></div>
+          <div key={i} className={styles.card}></div>
         ))}
       </div>
     </div>
