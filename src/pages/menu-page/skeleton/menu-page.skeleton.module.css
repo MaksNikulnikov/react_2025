@@ -6,7 +6,7 @@
 
 .block {
   height: 2.5rem;
-  background: #ddd;
+  background: var(--skeleton-base);
   border-radius: 4px;
   animation: pulse 1.5s infinite ease-in-out;
 }

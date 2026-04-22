@@ -1,8 +1,10 @@
 .shell {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(255, 138, 61, 0.08), transparent 24%),
-    linear-gradient(180deg, #f6f1e9 0%, #f4f6f8 18%, #f4f6f8 100%);
+  background: var(--shell-background);
+  color: var(--text-primary);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .main {
@@ -11,10 +13,10 @@
 }
 
 .footer {
-  background: #17212b;
-  color: #fff;
+  background: var(--footer-background);
+  color: var(--text-inverse);
   padding: 1.2rem 1.5rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-inverse);
 }
 
 .footerInner {
@@ -33,12 +35,13 @@
 }
 
 .footerText {
-  color: rgba(225, 232, 240, 0.78);
+  color: var(--text-inverse-muted);
 }
 
 .footerMeta {
-  color: rgba(225, 232, 240, 0.64);
+  color: var(--text-inverse-muted);
   font-size: 0.9rem;
+  opacity: 0.84;
 }
 
 @media (max-width: 640px) {

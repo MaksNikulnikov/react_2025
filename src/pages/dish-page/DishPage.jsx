@@ -4,9 +4,11 @@ import styles from "./dish-page.module.css";
 import { DishPageSkeleton } from "./skeleton/DishPage.skeleton";
 import { useGetDishByIdQuery } from "../../redux/services/api";
 import { StatusMessage } from "../../components/status-message/StatusMessage";
+import { useUser } from "../../components/user-context/use-user";
 
 export const DishPage = () => {
   const { dishId } = useParams();
+  const { isLogged } = useUser();
 
   const { data: dish, isLoading, isError } = useGetDishByIdQuery(dishId);
 
@@ -29,9 +31,13 @@ export const DishPage = () => {
       <p className={styles.ingredients}>
         Ingredients: {dish.ingredients.join(", ")}
       </p>
-      <div className={styles.counterWrapper}>
-        <DishCounter dishId={dish.id} isDisabled={false} />
-      </div>
+      {isLogged ? (
+        <div className={styles.counterWrapper}>
+          <DishCounter dishId={dish.id} isDisabled={false} />
+        </div>
+      ) : (
+        <StatusMessage tone="neutral" title="Sign in to add this dish to the cart." />
+      )}
     </div>
   );
 };

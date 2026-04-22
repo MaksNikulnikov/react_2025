@@ -27,25 +27,25 @@
 }
 
 .neutral {
-  background-color: #f4f7fb;
-  border-color: #d9e3ee;
-  color: #314254;
+  background-color: var(--status-neutral-bg);
+  border-color: var(--status-neutral-border);
+  color: var(--status-neutral-text);
 }
 
 .loading {
-  background-color: #fff5eb;
-  border-color: #f2d5b8;
-  color: #7a471f;
+  background-color: var(--status-loading-bg);
+  border-color: var(--status-loading-border);
+  color: var(--status-loading-text);
 }
 
 .empty {
-  background-color: #f7f8fa;
-  border-color: #dee4eb;
-  color: #526374;
+  background-color: var(--status-empty-bg);
+  border-color: var(--status-empty-border);
+  color: var(--status-empty-text);
 }
 
 .error {
-  background-color: #fff1ef;
-  border-color: #f3c5bc;
-  color: #8e3424;
+  background-color: var(--status-error-bg);
+  border-color: var(--status-error-border);
+  color: var(--status-error-text);
 }

@@ -33,5 +33,11 @@ export const selectCartItemsIds = createSelector(
   },
 );
 
+export const selectCartTotalAmount = createSelector(
+  [selectCartSlice],
+  (cartSlice) =>
+    Object.values(cartSlice).reduce((total, amount) => total + amount, 0),
+);
+
 export const { selectAmountById } = cartSlice.selectors;
 export const { addToCart, removeFromCart } = cartSlice.actions;

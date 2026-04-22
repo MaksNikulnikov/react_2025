@@ -1,75 +1,60 @@
 .buttonBase {
-  border-radius: 4px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.buttonBase:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .smallButton {
-  width: 2rem;
-  height: 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 4px;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
 }
 
 .ordinaryButton {
-  padding: 8px 16px;
-  font-size: 1rem;
-  border-radius: 8px;
+  min-height: 40px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 10px;
 }
 
-.colorBaseLight {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+.colorBase {
+  background-color: var(--button-base-bg);
+  border-color: var(--button-base-border);
+  color: var(--button-base-text);
 }
 
-.colorBaseLight:hover {
-  background-color: #e0e0e0;
+.colorBase:hover:not(:disabled) {
+  background-color: var(--button-base-bg-hover);
 }
 
-.colorBaseDark {
-  background-color: #333;
-  color: white;
-  border-color: #555;
+.colorBlue {
+  background-color: var(--button-blue-bg);
+  border-color: var(--button-blue-border);
+  color: var(--button-blue-text);
 }
 
-.colorBaseDark:hover {
-  background-color: #444;
-}
-.colorBlueLight {
-  background-color: #007bff;
-  color: white;
+.colorBlue:hover:not(:disabled) {
+  background-color: var(--button-blue-bg-hover);
 }
 
-.colorBlueLight:hover {
-  background-color: #3399ff;
+.colorGreen {
+  background-color: var(--button-green-bg);
+  border-color: var(--button-green-border);
+  color: var(--button-green-text);
 }
 
-.colorBlueDark {
-  background-color: #0056b3;
-  color: white;
-}
-
-.colorBlueDark:hover {
-  background-color: #003d80;
-  border-color: #333;
-}
-
-.colorGreenLight {
-  background-color: #28a745;
-  color: white;
-}
-
-.colorGreenLight:hover {
-  background-color: #45c16c;
-}
-
-.colorGreenDark {
-  background-color: #1e7e34;
-  color: white;
-}
-
-.colorGreenDark:hover {
-  background-color: #155d27;
-  border-color: #2c3e50;
+.colorGreen:hover:not(:disabled) {
+  background-color: var(--button-green-bg-hover);
 }

@@ -14,10 +14,8 @@
 .heroContent {
   padding: 2.5rem;
   border-radius: 28px;
-  background:
-    radial-gradient(circle at top right, rgba(255, 138, 61, 0.28), transparent 34%),
-    linear-gradient(145deg, #fff9f3 0%, #f4efe7 58%, #efe8dd 100%);
-  box-shadow: 0 24px 60px rgba(39, 48, 63, 0.08);
+  background: var(--hero-background);
+  box-shadow: var(--shadow-large);
 }
 
 .eyebrow {
@@ -26,7 +24,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #b54c18;
+  color: var(--accent-muted);
 }
 
 .title {
@@ -35,7 +33,7 @@
   font-size: clamp(2.6rem, 5vw, 4.8rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
-  color: #17212b;
+  color: var(--text-primary);
 }
 
 .description {
@@ -43,7 +41,7 @@
   margin-bottom: 1.5rem;
   font-size: 1.02rem;
   line-height: 1.75;
-  color: #4f5d6e;
+  color: var(--text-secondary);
 }
 
 .actions {
@@ -70,25 +68,25 @@
 }
 
 .primaryAction {
-  background: linear-gradient(135deg, #ff8a3d, #d94f2a);
-  color: #fff;
-  box-shadow: 0 12px 26px rgba(217, 79, 42, 0.28);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-brand);
 }
 
 .primaryAction:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 28px rgba(217, 79, 42, 0.34);
+  box-shadow: var(--shadow-large);
 }
 
 .secondaryAction {
-  border: 1px solid rgba(23, 33, 43, 0.14);
-  color: #17212b;
-  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  background-color: var(--surface-card);
 }
 
 .secondaryAction:hover {
   transform: translateY(-1px);
-  background-color: #fff;
+  background-color: var(--surface-primary);
 }
 
 .metrics {
@@ -100,10 +98,10 @@
 
 .metrics li {
   padding: 0.7rem 0.95rem;
-  border: 1px solid rgba(23, 33, 43, 0.08);
+  border: 1px solid var(--border-soft);
   border-radius: 14px;
-  background-color: rgba(255, 255, 255, 0.74);
-  color: #354455;
+  background-color: var(--surface-muted);
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
@@ -116,16 +114,16 @@
 .previewAccent {
   border-radius: 24px;
   padding: 1.35rem;
-  box-shadow: 0 24px 60px rgba(39, 48, 63, 0.08);
+  box-shadow: var(--shadow-large);
 }
 
 .previewCard {
-  background: linear-gradient(180deg, #ffffff 0%, #f7f9fb 100%);
+  background: var(--preview-card-background);
 }
 
 .previewAccent {
-  background: linear-gradient(145deg, #17212b 0%, #27384b 100%);
-  color: #f7fafc;
+  background: var(--preview-accent-background);
+  color: var(--text-inverse);
 }
 
 .previewLabel,
@@ -139,17 +137,17 @@
 }
 
 .previewLabel {
-  color: #a64b20;
+  color: var(--accent-muted);
 }
 
 .previewAccentLabel {
-  color: #ffb07d;
+  color: var(--accent-soft);
 }
 
 .previewTitle {
   margin-bottom: 0.55rem;
   font-size: 1.3rem;
-  color: #17212b;
+  color: var(--text-primary);
 }
 
 .previewText,
@@ -158,11 +156,11 @@
 }
 
 .previewText {
-  color: #596879;
+  color: var(--text-subtle);
 }
 
 .previewAccentText {
-  color: rgba(247, 250, 252, 0.86);
+  color: var(--text-inverse-muted);
 }
 
 .capabilities {
@@ -175,25 +173,26 @@
 .capabilityCard {
   padding: 1.4rem;
   border-radius: 22px;
-  background: #ffffff;
-  box-shadow: 0 18px 48px rgba(39, 48, 63, 0.06);
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--border-soft);
 }
 
 .cardIndex {
   margin-bottom: 1rem;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #b54c18;
+  color: var(--accent-muted);
 }
 
 .cardTitle {
   margin-bottom: 0.6rem;
   font-size: 1.2rem;
-  color: #17212b;
+  color: var(--text-primary);
 }
 
 .cardText {
-  color: #607084;
+  color: var(--text-secondary);
   line-height: 1.7;
 }
 

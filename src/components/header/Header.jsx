@@ -1,13 +1,19 @@
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
 import { useTheme } from "../theme-context/use-theme";
 import { Button } from "../button/Button";
 import styles from "./header.module.css";
 import { Cart } from "../cart/Cart";
 import { Modal } from "../modal/Modal";
 import { UserSession } from "../user-session/UserSession";
+import { selectCartTotalAmount } from "../../redux/entities/cart/slice";
 
 export const Header = () => {
-  const { toggleTheme, theme } = useTheme();
+  const { toggleTheme, themeLabel } = useTheme();
+  const cartItemsCount = useSelector(selectCartTotalAmount);
+  const cartButtonName = cartItemsCount
+    ? `Cart (${cartItemsCount})`
+    : "Cart";
 
   return (
     <header className={styles.header}>
@@ -24,8 +30,8 @@ export const Header = () => {
 
         <div className={styles.actions}>
           <UserSession />
-          <Button onClick={toggleTheme} name={theme} />
-          <Modal buttonName="Cart">
+          <Button onClick={toggleTheme} name={themeLabel} />
+          <Modal buttonName={cartButtonName}>
             <Cart />
           </Modal>
         </div>

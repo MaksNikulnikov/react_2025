@@ -1,6 +1,6 @@
 .userInfo {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-muted);
 }
 
 .label {
@@ -9,5 +9,5 @@
 }
 
 .name {
-  color: #333;
+  color: var(--text-primary);
 }

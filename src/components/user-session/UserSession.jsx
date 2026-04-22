@@ -1,4 +1,3 @@
-import { useMemo, useState } from "react";
 import { Button } from "../button/Button";
 import { useGetUsersQuery } from "../../redux/services/api";
 import { useUser } from "../user-context/use-user";
@@ -7,25 +6,26 @@ import styles from "./user-session.module.css";
 export const UserSession = () => {
   const { data: users = [], isLoading, isError } = useGetUsersQuery();
   const { currentUser, isLogged, logIn, logOut, userId, userName } = useUser();
-  const [selectedUserId, setSelectedUserId] = useState("");
 
-  const activeUserId = selectedUserId || userId || "";
+  const handleUserChange = (event) => {
+    const nextUserId = event.target.value;
 
-  const selectedUser = useMemo(
-    () => users.find((user) => user.id === activeUserId),
-    [users, activeUserId],
-  );
+    if (!nextUserId) {
+      logOut();
+      return;
+    }
 
-  const handleUseSelectedUser = () => {
-    if (selectedUser) {
-      logIn(selectedUser);
+    const nextUser = users.find((user) => user.id === nextUserId);
+
+    if (nextUser) {
+      logIn(nextUser);
     }
   };
 
   return (
     <div className={styles.session}>
       <div className={styles.summary}>
-        {isLogged ? `Signed in as ${userName}` : "Choose a demo user"}
+        {isLogged ? `Demo user: ${userName}` : "Choose a demo user"}
       </div>
 
       {isLoading ? (
@@ -36,8 +36,8 @@ export const UserSession = () => {
         <div className={styles.controls}>
           <select
             className={styles.select}
-            value={activeUserId}
-            onChange={(event) => setSelectedUserId(event.target.value)}
+            value={userId}
+            onChange={handleUserChange}
             aria-label="Demo user"
           >
             <option value="">Select a profile</option>
@@ -47,11 +47,6 @@ export const UserSession = () => {
               </option>
             ))}
           </select>
-
-          <Button
-            onClick={handleUseSelectedUser}
-            name={isLogged ? "Use selected user" : "Sign in"}
-          />
 
           {currentUser ? <Button onClick={logOut} name="Sign out" /> : null}
         </div>

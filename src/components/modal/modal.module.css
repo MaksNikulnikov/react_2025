@@ -1,7 +1,7 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--surface-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,13 +9,15 @@
 }
 
 .modalContent {
-  background: #fff;
+  background: var(--surface-primary);
   padding: 2rem;
   border-radius: 12px;
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-large);
   position: relative;
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
 }
 
 .closeButton {
@@ -24,12 +26,12 @@
   right: 0.75rem;
   border: none;
   background: transparent;
-  color: #526374;
+  color: var(--text-muted);
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
 }
 
 .closeButton:hover {
-  color: #1f2d3d;
+  color: var(--text-primary);
 }

@@ -1,6 +1,5 @@
-import { useTheme } from "../theme-context/use-theme";
-import styles from "./button.module.css";
 import classNames from "classnames";
+import styles from "./button.module.css";
 
 export const Button = ({
   name,
@@ -9,26 +8,18 @@ export const Button = ({
   variant = "ordinaryButton",
   color = "Base",
   type = "button",
+  disabled = false,
 }) => {
-  const { theme } = useTheme();
-
   const colorClass = isActive ? "Green" : color;
-
-  const colorThemeClass =
-    color && theme === "🌙 Dark"
-      ? styles[`color${colorClass}Dark`]
-      : styles[`color${colorClass}Light`];
 
   return (
     <button
       className={classNames(
         styles.buttonBase,
         styles[variant],
-        colorThemeClass,
-        {
-          [styles.active]: isActive,
-        },
+        styles[`color${colorClass}`],
       )}
+      disabled={disabled}
       onClick={onClick}
       type={type}
     >
