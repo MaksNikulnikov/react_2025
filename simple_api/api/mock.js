@@ -1,8 +1,8 @@
 const normalizedRestaurants = [
   {
     id: "a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2",
-    name: "Вкусно и точка",
-    description: "Японская кухня",
+    name: "Masala Berlin",
+    description: "Indian kitchen",
     img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
     menu: [
       "d75f762a-eadd-49be-8918-ed0daa8dd024",
@@ -16,8 +16,8 @@ const normalizedRestaurants = [
   },
   {
     id: "bb8afbec-2fec-491f-93e9-7f13950dd80b",
-    name: "Homeslice",
-    description: "Итальянская кухня",
+    name: "Vapiano",
+    description: "Italian kitchen",
     img: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
     menu: [
       "25402233-0095-49ea-9939-1e67ed89ffb9",
@@ -31,8 +31,8 @@ const normalizedRestaurants = [
   },
   {
     id: "982bfbce-c5e0-41a0-9f99-d5c20ecee49d",
-    name: "Fabrique",
-    description: "Русская кухня",
+    name: "Fabrique Stockholm",
+    description: "Swedish bakery",
     img: "https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
     menu: [
       "08c9ffa0-d003-4310-9e15-20978743296e",
@@ -43,8 +43,8 @@ const normalizedRestaurants = [
   },
   {
     id: "d9241927-09e1-44f3-8986-a76346869037",
-    name: "Flat Iron",
-    description: "Грузинская кухня",
+    name: "MAX Burgers",
+    description: "Nordic grill",
     img: "https://images.unsplash.com/photo-1559314809-0d155014e29e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80",
     menu: [
       "6c02c2ce-b868-4191-b4a7-8686429f4bac",
@@ -78,13 +78,13 @@ const normalizedProducts = [
   },
   {
     id: "25402233-0095-49ea-9939-1e67ed89ffb9",
-    name: "Margarita",
+    name: "Margherita Pizza",
     price: 9,
     ingredients: ["bread", "cheese", "tomatoes"],
   },
   {
     id: "90902233-0095-49ea-9939-1e67ed89ffb9",
-    name: "Chef pizza",
+    name: "House Pizza",
     price: 10,
     ingredients: ["bread", "cheese", "tomatoes", "chicken"],
   },
@@ -136,13 +136,13 @@ const normalizedReviews = [
   {
     id: "53b642d7-5e86-4717-a466-0640a1dee076",
     userId: "20bed9b5-9c7b-4771-8221-75b74ed1904a",
-    text: "Perfect Margarita",
+    text: "Perfect Margherita pizza",
     rating: 5,
   },
   {
     id: "c27ab88e-375c-4e98-aa94-8a180150a797",
     userId: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
-    text: "No burgers again. But Chef Pizza is the best one",
+    text: "No burgers again, but the house pizza is the best one",
     rating: 4,
   },
   {
@@ -174,7 +174,7 @@ const normalizedReviews = [
 const normalizedUsers = [
   {
     id: "a304959a-76c0-4b34-954a-b38dbf310360",
-    name: "Antony",
+    name: "Antoine",
   },
   {
     id: "20bed9b5-9c7b-4771-8221-75b74ed1904a",
@@ -182,7 +182,7 @@ const normalizedUsers = [
   },
   {
     id: "c3d4abd4-c3ef-46e1-8719-eb17db1d6e99",
-    name: "Lolly",
+    name: "Lucia",
   },
   {
     id: "52a63cc0-5a6f-41f3-9774-0161ea4c9b0c",
@@ -190,11 +190,11 @@ const normalizedUsers = [
   },
   {
     id: "1547335a-ea18-4547-a73d-32bd6e9f651c",
-    name: "Rebeca",
+    name: "Rebecca",
   },
   {
     id: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
-    name: "Sam",
+    name: "Matteo",
   },
 ];
 
