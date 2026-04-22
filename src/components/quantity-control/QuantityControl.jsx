@@ -27,9 +27,19 @@ export const QuantityControl = ({
 
   return (
     <div className={styles.control}>
-      <Button name="-" onClick={onDecrement} variant="smallButton" />
+      <Button
+        name="-"
+        onClick={onDecrement}
+        variant="smallButton"
+        ariaLabel="Decrease quantity"
+      />
       <span className={styles.count}>{safeValue}</span>
-      <Button name="+" onClick={onIncrement} variant="smallButton" />
+      <Button
+        name="+"
+        onClick={onIncrement}
+        variant="smallButton"
+        ariaLabel="Increase quantity"
+      />
     </div>
   );
 };

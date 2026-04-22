@@ -10,34 +10,41 @@ const createModalRoot = () => {
 };
 
 describe("Modal", () => {
-  it("opens and closes through the close button and Escape", async () => {
+  it("traps focus inside the dialog and restores focus to the trigger", async () => {
     createModalRoot();
     const user = userEvent.setup();
 
     render(
       <Modal triggerLabel="Cart" dialogLabel="Cart contents">
-        <div>Cart body</div>
+        <button type="button">Checkout</button>
       </Modal>,
     );
 
-    await user.click(screen.getByRole("button", { name: "Cart" }));
+    const trigger = screen.getByRole("button", { name: "Cart" });
 
-    expect(
-      screen.getByRole("dialog", { name: "Cart contents" }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Cart body")).toBeInTheDocument();
+    await user.click(trigger);
 
-    await user.click(screen.getByRole("button", { name: "Close modal" }));
+    const closeButton = screen.getByRole("button", { name: "Close modal" });
+    const checkoutButton = screen.getByRole("button", { name: "Checkout" });
 
-    expect(
-      screen.queryByRole("dialog", { name: "Cart contents" }),
-    ).not.toBeInTheDocument();
+    expect(screen.getByRole("dialog", { name: "Cart contents" })).toBeInTheDocument();
+    expect(closeButton).toHaveFocus();
 
-    await user.click(screen.getByRole("button", { name: "Cart" }));
+    await user.tab();
+    expect(checkoutButton).toHaveFocus();
+
+    await user.tab();
+    expect(closeButton).toHaveFocus();
+
+    await user.click(closeButton);
+
+    expect(screen.queryByRole("dialog", { name: "Cart contents" })).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+
+    await user.click(trigger);
     fireEvent.keyDown(window, { key: "Escape" });
 
-    expect(
-      screen.queryByRole("dialog", { name: "Cart contents" }),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog", { name: "Cart contents" })).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
   });
 });

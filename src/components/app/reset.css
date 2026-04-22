@@ -188,3 +188,8 @@ button {
   border: none;
   cursor: pointer;
 }
+
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}

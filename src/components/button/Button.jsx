@@ -9,11 +9,14 @@ export const Button = ({
   color = "Base",
   type = "button",
   disabled = false,
+  ariaLabel,
+  buttonRef,
 }) => {
   const colorClass = isActive ? "Green" : color;
 
   return (
     <button
+      aria-label={ariaLabel}
       className={classNames(
         styles.buttonBase,
         styles[variant],
@@ -21,6 +24,7 @@ export const Button = ({
       )}
       disabled={disabled}
       onClick={onClick}
+      ref={buttonRef}
       type={type}
     >
       {name}
