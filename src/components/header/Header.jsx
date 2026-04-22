@@ -31,7 +31,7 @@ export const Header = () => {
         <div className={styles.actions}>
           <UserSession />
           <Button onClick={toggleTheme} name={themeLabel} />
-          <Modal buttonName={cartButtonName}>
+          <Modal triggerLabel={cartButtonName} dialogLabel="Cart contents">
             <Cart />
           </Modal>
         </div>

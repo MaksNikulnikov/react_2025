@@ -1,14 +1,14 @@
-import { Counter } from "../counter/Counter";
+import { QuantityControl } from "../quantity-control/QuantityControl";
 import { useCounter } from "./use-counter";
 
 export const DishCounter = ({ dishId, isDisabled }) => {
   const { value, increment, decrement } = useCounter(dishId);
   return (
-    <Counter
+    <QuantityControl
       isDisabled={isDisabled}
       value={value}
-      increment={increment}
-      decrement={decrement}
+      onIncrement={increment}
+      onDecrement={decrement}
     />
   );
 };

@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { Button } from "../button/Button";
 import { createPortal } from "react-dom";
+import { Button } from "../button/Button";
 import styles from "./modal.module.css";
 
-export const Modal = ({ buttonName, children }) => {
+export const Modal = ({ triggerLabel, dialogLabel, children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const modalRoot = document.getElementById("modal");
+  const resolvedDialogLabel = dialogLabel ?? triggerLabel;
+
+  const openModal = () => setIsVisible(true);
+  const closeModal = () => setIsVisible(false);
 
   useEffect(() => {
     if (!isVisible) {
@@ -14,7 +18,7 @@ export const Modal = ({ buttonName, children }) => {
 
     const handleEscape = (event) => {
       if (event.key === "Escape") {
-        setIsVisible(false);
+        closeModal();
       }
     };
 
@@ -26,23 +30,23 @@ export const Modal = ({ buttonName, children }) => {
   const modalContent = (
     <div
       className={styles.modalBackdrop}
-      onClick={() => setIsVisible(false)}
+      onClick={closeModal}
       role="presentation"
     >
       <div
         className={styles.modalContent}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label={buttonName}
+        aria-label={resolvedDialogLabel}
       >
         <button
           className={styles.closeButton}
           type="button"
-          onClick={() => setIsVisible(false)}
+          onClick={closeModal}
           aria-label="Close modal"
         >
-          ×
+          &times;
         </button>
         {children}
       </div>
@@ -51,7 +55,7 @@ export const Modal = ({ buttonName, children }) => {
 
   return (
     <>
-      <Button onClick={() => setIsVisible(!isVisible)} name={buttonName} />
+      <Button onClick={openModal} name={triggerLabel} />
       {isVisible
         ? modalRoot
           ? createPortal(modalContent, modalRoot)

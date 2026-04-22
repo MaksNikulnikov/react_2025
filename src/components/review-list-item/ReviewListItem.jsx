@@ -1,5 +1,5 @@
 import { Button } from "../button/Button";
-import { Counter } from "../counter/Counter";
+import { RatingDisplay } from "../rating-display/RatingDisplay";
 import styles from "./review-list-item.module.css";
 import { ReviewForm } from "../review-form/ReviewForm";
 import { UserInfo } from "../user-info/UserInfo";
@@ -14,7 +14,7 @@ export const ReviewListItem = ({
   return (
     <li className={styles.reviewItem}>
       <p className={styles.reviewText}>{review.text}</p>
-      <Counter value={review.rating} />
+      <RatingDisplay value={review.rating} />
       <UserInfo user={user} />
       {isFormVisible ? (
         <ReviewForm
