@@ -16,7 +16,7 @@ export const RestaurantPage = () => {
 
   if (isLoading) return <RestaurantPageSkeleton />;
 
-  if (isError) {
+  if (isError || !restaurant) {
     return (
       <section className={styles.restaurant}>
         <StatusMessage tone="error" title="Restaurant unavailable.">
@@ -36,12 +36,7 @@ export const RestaurantPage = () => {
       </nav>
 
       <div className={styles.content}>
-        <Outlet
-          context={{
-            menuIds: restaurant.menu,
-            reviewsIds: restaurant.reviews,
-          }}
-        />
+        <Outlet />
       </div>
     </section>
   );
