@@ -1,0 +1,59 @@
+.item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: var(--surface-primary);
+}
+
+.details {
+  min-width: 0;
+}
+
+.name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.total {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.totalLabel {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.totalValue {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .item {
+    flex-direction: column;
+  }
+
+  .total {
+    text-align: left;
+  }
+}

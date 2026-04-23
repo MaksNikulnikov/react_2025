@@ -12,8 +12,9 @@
   background: var(--surface-primary);
   padding: 2rem;
   border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
+  width: min(92vw, 760px);
+  max-height: min(80vh, 720px);
+  overflow: auto;
   box-shadow: var(--shadow-large);
   position: relative;
   border: 1px solid var(--border-soft);

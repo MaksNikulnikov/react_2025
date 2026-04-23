@@ -1,0 +1,115 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.header {
+  padding-right: 2rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.caption {
+  margin-top: 0.45rem;
+  color: var(--text-secondary);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section {
+  padding: 1.1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: var(--surface-secondary);
+  box-shadow: var(--shadow-soft);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sectionDescription {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.sectionMeta {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.sectionStat {
+  min-width: 92px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: var(--surface-primary);
+  text-align: right;
+}
+
+.sectionStatLabel {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sectionStatValue {
+  margin-top: 0.15rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.itemList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.itemFallback {
+  list-style: none;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding-right: 0;
+  }
+
+  .section {
+    padding: 0.95rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+  }
+
+  .sectionMeta {
+    width: 100%;
+  }
+
+  .sectionStat {
+    flex: 1;
+    text-align: left;
+  }
+}

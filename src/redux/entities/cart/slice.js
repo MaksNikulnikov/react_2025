@@ -18,6 +18,7 @@ export const cartSlice = createSlice({
         delete state[payload];
       }
     },
+    clearCart: () => ({}),
   },
   selectors: {
     selectAmountById: (state, id) => state[id],
@@ -40,4 +41,4 @@ export const selectCartTotalAmount = createSelector(
 );
 
 export const { selectAmountById } = cartSlice.selectors;
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
