@@ -1,8 +1,25 @@
 # Restaurant Explorer
 
-Restaurant Explorer is a portfolio React application for browsing restaurants, opening menu and dish pages, reading reviews, and interacting with a demo cart. The project is built as a small SPA with client-side routing, RTK Query data loading, and a local mock API.
+Restaurant Explorer is a portfolio React SPA focused on one narrow task: help a user compare a few restaurants quickly, then drill into menus, dishes, reviews, and a demo cart flow.
 
-## Stack
+The project is intentionally small, but it is organized like a real client application:
+- route-based page composition
+- RTK Query for server state
+- Redux slice state for the cart
+- small React contexts for theme and demo user session
+- local Express mock API for repeatable development and testing
+
+## Product Goal
+
+The landing list is designed as a decision surface, not just a navigation list. A user can:
+- compare restaurants by cuisine, menu size, and review volume
+- filter the list by cuisine
+- inspect one restaurant in more detail
+- browse the menu and individual dishes
+- sign in as a demo user and create or edit one review
+- add dishes to a demo cart
+
+## Tech Stack
 
 - React 19
 - Vite
@@ -10,52 +27,49 @@ Restaurant Explorer is a portfolio React application for browsing restaurants, o
 - Redux Toolkit
 - RTK Query
 - CSS Modules
+- Vitest + React Testing Library
 - Express mock API
 
-## Features
+## Architecture
 
-- restaurant list page
-- nested routes for menu and reviews
-- separate dish page
-- demo cart with quantity controls
-- review creation and update flow
-- loading skeletons for key screens
-- theme toggle and basic modal flow
+`src/`
+- application shell, routes, pages, and UI components
+- server-state access through RTK Query in `src/redux/services/api.js`
+- cart state in `src/redux/entities/cart/slice.js`
+- theme and demo-user state in small context providers
 
-## Project Structure
+`simple_api/`
+- local Express API
+- in-memory mock dataset
+- review validation rules and Node test coverage
 
-- `src/` contains the client application
-- `simple_api/` contains the local Express API with mock data
-- `public/` contains static assets such as the favicon
+### Main decisions
 
-## Getting Started
+- RTK Query handles API calls and invalidation instead of ad hoc `useEffect` fetch logic.
+- Cart state stays in Redux because it is cross-page client state.
+- Theme and demo-user session stay in context because they are simple UI concerns.
+- The mock API keeps the project deterministic and easy to review locally.
+
+## Local Development
 
 ### 1. Install dependencies
 
-Install frontend dependencies in the project root:
-
 ```bash
 npm install
+npm install --prefix simple_api
 ```
 
-Install API dependencies in `simple_api`:
+### 2. Configure the API base URL if needed
 
-```bash
-cd simple_api
-npm install
-```
+The frontend reads `VITE_API_BASE_URL`.
 
-### 2. Optional local configuration
-
-The frontend reads the API base URL from `VITE_API_BASE_URL`.
-
-For local development, the default value is:
+Default local value:
 
 ```bash
 http://localhost:3001/api
 ```
 
-If you want to change it, create `.env.local` in the project root and set:
+To override it, create `.env.local` in the project root:
 
 ```bash
 VITE_API_BASE_URL=http://localhost:3001/api
@@ -65,47 +79,51 @@ A tracked example is available in `.env.example`.
 
 ### 3. Start the app
 
-Fastest option from the project root:
+Start frontend and mock API together:
 
 ```bash
 npm run dev:all
 ```
 
-This starts both the Vite frontend and the local mock API.
-
-### 4. Start services separately
-
-Start the mock API:
+Or run them separately:
 
 ```bash
 npm run server
-```
-
-The API runs on `http://localhost:3001`.
-
-In a second terminal, start the frontend:
-
-```bash
 npm run dev
 ```
 
-By default, Vite starts the app on `http://localhost:5173`.
+Expected local addresses:
+- frontend: `http://localhost:5173`
+- API: `http://localhost:3001`
 
-## Available Scripts
+## Scripts
 
-- `npm run dev` starts the Vite dev server
-- `npm run dev:all` starts the frontend and local API together
+- `npm run dev` starts Vite
+- `npm run dev:all` starts Vite and the mock API together
+- `npm run server` starts the mock API
+- `npm run lint` runs ESLint across frontend, tooling, and mock API files
+- `npm run test` runs Node API tests and frontend Vitest tests
 - `npm run build` creates a production build
-- `npm run preview` previews the production build locally
-- `npm run lint` runs ESLint across the frontend, tooling files, and mock API
-- `npm run test` runs the current automated checks for review validation rules
-- `npm run server` starts the local mock API
+- `npm run preview` serves the production build locally
+
+## Testing and Verification
+
+The repository includes three levels of verification:
+
+- API rule tests in `simple_api/api/*.test.js`
+- React UI regression tests with Vitest and React Testing Library
+- GitHub Actions matrix verification on Windows, macOS, and Linux
+
+CI currently checks:
+- dependency installation
+- lint
+- tests
+- production build
+- `dev:all` startup smoke test
 
 ## API Overview
 
-The frontend expects a local API at `http://localhost:3001/api` unless `VITE_API_BASE_URL` overrides it.
-
-Main endpoints:
+The frontend expects the following local endpoints:
 
 - `GET /api/restaurants`
 - `GET /api/restaurant/:restaurantId`
@@ -118,7 +136,6 @@ Main endpoints:
 
 ## Notes
 
-- The API uses mock data stored locally in `simple_api/api/mock.js`.
-- Review changes are stored in memory and reset after restarting the API server.
-- A small automated test suite covers the review validation rules in `simple_api/api/review-rules.test.js`.
-- This repository is focused on frontend architecture and state flow rather than backend persistence.
+- Review changes are stored in memory and reset when the mock API restarts.
+- The project is optimized for architecture clarity and reviewability, not backend persistence.
+- `middle-plus-plan.md` is a local working note and is intentionally not part of the repository.
