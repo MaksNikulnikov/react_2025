@@ -10,7 +10,7 @@ import { DishPage } from "../pages/dish-page/DishPage";
 
 export const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />

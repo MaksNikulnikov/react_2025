@@ -104,6 +104,7 @@ Expected local addresses:
 - `npm run lint` runs ESLint across frontend, tooling, and mock API files
 - `npm run test` runs Node API tests and frontend Vitest tests
 - `npm run build` creates a production build
+- `npm run build:pages` creates a GitHub Pages build with a static demo data seed
 - `npm run preview` serves the production build locally
 
 ## Testing and Verification
@@ -121,6 +122,26 @@ CI currently checks:
 - production build
 - `dev:all` startup smoke test
 
+## GitHub Pages Deployment
+
+The repository includes a dedicated GitHub Pages workflow in
+`.github/workflows/deploy-pages.yml`.
+
+For this repository, GitHub Pages should be configured in:
+- `Settings -> Pages`
+- `Build and deployment -> Source -> GitHub Actions`
+
+Important detail:
+- GitHub Pages cannot run the local Express API from `simple_api/`
+- the Pages build uses a static seed exported from the mock dataset and a browser-side demo API backed by `localStorage`
+- create and update review actions still work on the deployed site, but they persist only in the browser that submitted them
+
+For this repository, the published site URL will be:
+
+```text
+https://maksnikulnikov.github.io/react_2025/
+```
+
 ## API Overview
 
 The frontend expects the following local endpoints:
@@ -137,5 +158,6 @@ The frontend expects the following local endpoints:
 ## Notes
 
 - Review changes are stored in memory and reset when the mock API restarts.
+- GitHub Pages builds use a browser-side demo API seeded from the same mock data.
 - The project is optimized for architecture clarity and reviewability, not backend persistence.
 - `middle-plus-plan.md` is a local working note and is intentionally not part of the repository.

@@ -8,6 +8,7 @@
     "dev": "vite",
     "dev:all": "node scripts/dev-all.mjs",
     "build": "vite build",
+    "build:pages": "vite build && node scripts/prepare-pages.mjs",
     "lint": "eslint .",
     "test": "npm run test:api && npm run test:web",
     "test:api": "npm run test --prefix simple_api",

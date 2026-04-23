@@ -1,11 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_BASE_URL } from "../../config/api";
+import { API_BASE_URL, IS_GITHUB_PAGES_DEMO_API } from "../../config/api";
+import { createPagesBaseQuery } from "./pages-base-query";
+
+const baseQuery = IS_GITHUB_PAGES_DEMO_API
+  ? createPagesBaseQuery()
+  : fetchBaseQuery({
+      baseUrl: API_BASE_URL,
+    });
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
-  }),
+  baseQuery,
   tagTypes: ["Restaurant", "Dish", "Review", "User"],
   endpoints: (builder) => ({
     getRestaurants: builder.query({
