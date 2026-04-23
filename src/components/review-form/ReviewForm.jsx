@@ -89,7 +89,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
           id="review"
           value={review}
           placeholder="Share your impression"
-          onChange={setReview}
+          onChange={(event) => setReview(event.target.value)}
         ></textarea>
       </div>
 
@@ -101,7 +101,7 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
           className={styles.select}
           id="rating"
           value={rating}
-          onChange={setRating}
+          onChange={(event) => setRating(event.target.value)}
         >
           {[1, 2, 3, 4, 5].map((n) => (
             <option key={n} value={n.toString()}>
@@ -112,19 +112,15 @@ export const ReviewForm = ({ reviewData, handleUpdate }) => {
       </div>
 
       <div className={styles.actions}>
-        <Button onClick={handleClear} name="Clear" />
+        <Button onClick={handleClear}>Clear</Button>
         {isNewReview ? (
-          <Button
-            type="submit"
-            color="Blue"
-            name={isLoading ? "Submitting..." : "Submit review"}
-          />
+          <Button type="submit" color="Blue">
+            {isLoading ? "Submitting..." : "Submit review"}
+          </Button>
         ) : (
-          <Button
-            type="submit"
-            color="Blue"
-            name={isUpdating ? "Updating..." : "Update review"}
-          />
+          <Button type="submit" color="Blue">
+            {isUpdating ? "Updating..." : "Update review"}
+          </Button>
         )}
       </div>
     </form>

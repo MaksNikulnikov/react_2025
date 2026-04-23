@@ -18,7 +18,7 @@ vi.mock("../user-session/UserSession", () => ({
 }));
 
 vi.mock("../modal/Modal", () => ({
-  Modal: ({ triggerLabel }) => <div>{triggerLabel}</div>,
+  Modal: ({ open, dialogLabel }) => (open ? <div>{dialogLabel}</div> : null),
 }));
 
 describe("Header", () => {

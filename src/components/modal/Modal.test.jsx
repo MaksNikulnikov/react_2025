@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useRef, useState } from "react";
 import { describe, expect, it } from "vitest";
+import { Button } from "../button/Button";
 import { Modal } from "./Modal";
 
 const createModalRoot = () => {
@@ -14,10 +16,29 @@ describe("Modal", () => {
     createModalRoot();
     const user = userEvent.setup();
 
+    const ModalHost = () => {
+      const [isOpen, setIsOpen] = useState(false);
+      const triggerRef = useRef(null);
+
+      return (
+        <>
+          <Button onClick={() => setIsOpen(true)} ref={triggerRef}>
+            Cart
+          </Button>
+          <Modal
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+            dialogLabel="Cart contents"
+            returnFocusRef={triggerRef}
+          >
+            <button type="button">Checkout</button>
+          </Modal>
+        </>
+      );
+    };
+
     render(
-      <Modal triggerLabel="Cart" dialogLabel="Cart contents">
-        <button type="button">Checkout</button>
-      </Modal>,
+      <ModalHost />,
     );
 
     const trigger = screen.getByRole("button", { name: "Cart" });

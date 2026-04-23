@@ -3,8 +3,7 @@ import { useReducer } from "react";
 const ACTION_TYPES = {
   SET_REVIEW: "SET_REVIEW",
   SET_RATING: "SET_RATING",
-  SET_ALL: "SET_ALL",
-  CLEAR_FORM: "CLEAR_FORM",
+  RESET_FORM: "RESET_FORM",
 };
 
 const DEFAULT_STATE = {
@@ -26,13 +25,7 @@ const reducer = (state, action) => {
       return { ...state, review: action.payload };
     case ACTION_TYPES.SET_RATING:
       return { ...state, rating: action.payload };
-    case ACTION_TYPES.SET_ALL:
-      return {
-        ...state,
-        review: action.payload.text,
-        rating: action.payload.rating ?? state.rating,
-      };
-    case ACTION_TYPES.CLEAR_FORM:
+    case ACTION_TYPES.RESET_FORM:
       return action.payload;
     default:
       return state;
@@ -40,21 +33,17 @@ const reducer = (state, action) => {
 };
 
 export const useForm = (reviewData) => {
-  const initialState = getFormState(reviewData);
+  const [form, dispatch] = useReducer(reducer, getFormState(reviewData));
 
-  const [form, dispatch] = useReducer(reducer, initialState);
-
-  const setReview = (e) =>
-    dispatch({ type: ACTION_TYPES.SET_REVIEW, payload: e.target.value });
-  const setRating = (e) =>
-    dispatch({ type: ACTION_TYPES.SET_RATING, payload: e.target.value });
+  const setReview = (value) =>
+    dispatch({ type: ACTION_TYPES.SET_REVIEW, payload: value });
+  const setRating = (value) =>
+    dispatch({ type: ACTION_TYPES.SET_RATING, payload: value });
   const clear = () =>
     dispatch({
-      type: ACTION_TYPES.CLEAR_FORM,
+      type: ACTION_TYPES.RESET_FORM,
       payload: getFormState(reviewData),
     });
-  const setAll = (values) =>
-    dispatch({ type: ACTION_TYPES.SET_ALL, payload: values });
 
-  return { form, setReview, setRating, clear, setAll };
+  return { form, setReview, setRating, clear };
 };

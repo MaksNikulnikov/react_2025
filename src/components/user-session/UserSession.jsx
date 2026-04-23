@@ -48,7 +48,7 @@ export const UserSession = () => {
             ))}
           </select>
 
-          {currentUser ? <Button onClick={logOut} name="Sign out" /> : null}
+          {currentUser ? <Button onClick={logOut}>Sign out</Button> : null}
         </div>
       )}
     </div>

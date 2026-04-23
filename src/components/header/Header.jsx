@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTheme } from "../theme-context/use-theme";
 import { Button } from "../button/Button";
@@ -9,6 +10,8 @@ import { UserSession } from "../user-session/UserSession";
 import { selectCartTotalAmount } from "../../redux/entities/cart/slice";
 
 export const Header = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const cartButtonRef = useRef(null);
   const { toggleTheme, themeLabel } = useTheme();
   const cartItemsCount = useSelector(selectCartTotalAmount);
   const cartButtonName = cartItemsCount
@@ -30,8 +33,16 @@ export const Header = () => {
 
         <div className={styles.actions}>
           <UserSession />
-          <Button onClick={toggleTheme} name={themeLabel} />
-          <Modal triggerLabel={cartButtonName} dialogLabel="Cart contents">
+          <Button onClick={toggleTheme}>{themeLabel}</Button>
+          <Button onClick={() => setIsCartOpen(true)} ref={cartButtonRef}>
+            {cartButtonName}
+          </Button>
+          <Modal
+            open={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            dialogLabel="Cart contents"
+            returnFocusRef={cartButtonRef}
+          >
             <Cart />
           </Modal>
         </div>

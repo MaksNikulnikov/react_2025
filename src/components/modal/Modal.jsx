@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Button } from "../button/Button";
 import styles from "./modal.module.css";
 
 const FOCUSABLE_SELECTOR = [
@@ -20,24 +19,18 @@ const getFocusableElements = (container) => {
   return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR));
 };
 
-export const Modal = ({ triggerLabel, dialogLabel, children }) => {
-  const [isVisible, setIsVisible] = useState(false);
+export const Modal = ({ open, onClose, dialogLabel, returnFocusRef, children }) => {
   const modalRoot = document.getElementById("modal");
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
-  const triggerButtonRef = useRef(null);
-  const resolvedDialogLabel = dialogLabel ?? triggerLabel;
-
-  const openModal = () => setIsVisible(true);
-  const closeModal = () => setIsVisible(false);
 
   useEffect(() => {
-    if (!isVisible) {
+    if (!open) {
       return undefined;
     }
 
     const dialogElement = dialogRef.current;
-    const triggerElement = triggerButtonRef.current;
+    const returnFocusElement = returnFocusRef?.current;
     const initialFocusTarget =
       closeButtonRef.current ||
       getFocusableElements(dialogElement)[0] ||
@@ -47,7 +40,7 @@ export const Modal = ({ triggerLabel, dialogLabel, children }) => {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        closeModal();
+        onClose();
         return;
       }
 
@@ -81,14 +74,18 @@ export const Modal = ({ triggerLabel, dialogLabel, children }) => {
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      triggerElement?.focus();
+      returnFocusElement?.focus();
     };
-  }, [isVisible]);
+  }, [onClose, open, returnFocusRef]);
+
+  if (!open) {
+    return null;
+  }
 
   const modalContent = (
     <div
       className={styles.modalBackdrop}
-      onClick={closeModal}
+      onClick={onClose}
       role="presentation"
     >
       <div
@@ -97,13 +94,13 @@ export const Modal = ({ triggerLabel, dialogLabel, children }) => {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={resolvedDialogLabel}
+        aria-label={dialogLabel}
         tabIndex={-1}
       >
         <button
           className={styles.closeButton}
           type="button"
-          onClick={closeModal}
+          onClick={onClose}
           aria-label="Close modal"
           ref={closeButtonRef}
         >
@@ -114,18 +111,7 @@ export const Modal = ({ triggerLabel, dialogLabel, children }) => {
     </div>
   );
 
-  return (
-    <>
-      <Button
-        onClick={openModal}
-        name={triggerLabel}
-        buttonRef={triggerButtonRef}
-      />
-      {isVisible
-        ? modalRoot
-          ? createPortal(modalContent, modalRoot)
-          : modalContent
-        : null}
-    </>
-  );
+  return modalRoot
+    ? createPortal(modalContent, modalRoot)
+    : modalContent;
 };

@@ -1,33 +1,34 @@
+import { forwardRef } from "react";
 import classNames from "classnames";
 import styles from "./button.module.css";
 
-export const Button = ({
-  name,
-  onClick,
-  isActive = false,
-  variant = "ordinaryButton",
-  color = "Base",
-  type = "button",
-  disabled = false,
-  ariaLabel,
-  buttonRef,
-}) => {
+export const Button = forwardRef(function Button(
+  {
+    children,
+    isActive = false,
+    variant = "ordinaryButton",
+    color = "Base",
+    className,
+    type = "button",
+    ...props
+  },
+  ref,
+) {
   const colorClass = isActive ? "Green" : color;
 
   return (
     <button
-      aria-label={ariaLabel}
       className={classNames(
         styles.buttonBase,
         styles[variant],
         styles[`color${colorClass}`],
+        className,
       )}
-      disabled={disabled}
-      onClick={onClick}
-      ref={buttonRef}
+      ref={ref}
       type={type}
+      {...props}
     >
-      {name}
+      {children}
     </button>
   );
-};
+});

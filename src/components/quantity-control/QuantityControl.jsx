@@ -12,7 +12,9 @@ export const QuantityControl = ({
   if (isDisabled) {
     return (
       <div className={styles.control}>
-        <Button name="Sign in to add" color="Blue" disabled />
+        <Button color="Blue" disabled>
+          Sign in to add
+        </Button>
       </div>
     );
   }
@@ -20,7 +22,9 @@ export const QuantityControl = ({
   if (safeValue === 0) {
     return (
       <div className={styles.control}>
-        <Button name="Add to cart" onClick={onIncrement} color="Blue" />
+        <Button onClick={onIncrement} color="Blue">
+          Add to cart
+        </Button>
       </div>
     );
   }
@@ -28,18 +32,20 @@ export const QuantityControl = ({
   return (
     <div className={styles.control}>
       <Button
-        name="-"
         onClick={onDecrement}
         variant="smallButton"
-        ariaLabel="Decrease quantity"
-      />
+        aria-label="Decrease quantity"
+      >
+        -
+      </Button>
       <span className={styles.count}>{safeValue}</span>
       <Button
-        name="+"
         onClick={onIncrement}
         variant="smallButton"
-        ariaLabel="Increase quantity"
-      />
+        aria-label="Increase quantity"
+      >
+        +
+      </Button>
     </div>
   );
 };

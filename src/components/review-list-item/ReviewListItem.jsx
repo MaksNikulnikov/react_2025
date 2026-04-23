@@ -21,10 +21,7 @@ export const ReviewListItem = ({ review, user, isOwn }) => {
       ) : (
         isOwn && (
           <div className={styles.reviewUpdateButtonContainer}>
-            <Button
-              name="Edit review"
-              onClick={() => setIsFormVisible(true)}
-            />
+            <Button onClick={() => setIsFormVisible(true)}>Edit review</Button>
           </div>
         )
       )}
