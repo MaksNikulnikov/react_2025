@@ -3,7 +3,6 @@
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
-  margin-bottom: 2rem;
   border: 1px solid var(--border-soft);
   color: var(--text-primary);
 }
@@ -12,4 +11,15 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .restaurant {
+    padding: 1.1rem;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
 }
