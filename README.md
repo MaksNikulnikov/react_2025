@@ -135,6 +135,7 @@ Important detail:
 - GitHub Pages cannot run the local Express API from `simple_api/`
 - the Pages build uses a static seed exported from the mock dataset and a browser-side demo API backed by `localStorage`
 - create and update review actions still work on the deployed site, but they persist only in the browser that submitted them
+- the home page includes a loading-state toggle that turns the simulated demo latency on or off for portfolio review
 
 For this repository, the published site URL will be:
 
@@ -159,5 +160,6 @@ The frontend expects the following local endpoints:
 
 - Review changes are stored in memory and reset when the mock API restarts.
 - GitHub Pages builds use a browser-side demo API seeded from the same mock data.
+- The home page can enable or disable simulated request latency to make skeleton states obvious during review.
 - The project is optimized for architecture clarity and reviewability, not backend persistence.
 - `middle-plus-plan.md` is a local working note and is intentionally not part of the repository.

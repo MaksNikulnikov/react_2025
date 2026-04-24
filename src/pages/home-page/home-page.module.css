@@ -94,6 +94,7 @@
   flex-wrap: wrap;
   gap: 0.7rem;
   list-style: none;
+  margin-bottom: 1.4rem;
 }
 
 .metrics li {
@@ -103,6 +104,87 @@
   background-color: var(--surface-muted);
   color: var(--text-secondary);
   font-size: 0.95rem;
+}
+
+.demoNotice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  background: var(--surface-muted);
+}
+
+.demoNoticeCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.demoNoticeLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-muted);
+}
+
+.demoNoticeText {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.demoNoticeMeta {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.demoToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-shrink: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.demoToggleTrack {
+  position: relative;
+  width: 3rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: var(--button-base-bg);
+  transition: background-color 0.2s ease;
+}
+
+.demoToggle[aria-pressed="true"] .demoToggleTrack {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.demoToggleKnob {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease;
+}
+
+.demoToggle[aria-pressed="true"] .demoToggleKnob {
+  transform: translateX(1.25rem);
+}
+
+.demoToggleText {
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .previewPanel {
@@ -238,5 +320,15 @@
 
   .metrics li {
     width: 100%;
+  }
+
+  .demoNotice {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .demoToggle {
+    width: 100%;
+    justify-content: space-between;
   }
 }

@@ -1,7 +1,10 @@
 import { Link } from "react-router";
+import { useDemoLatency } from "../../components/demo-latency-context/use-demo-latency";
 import styles from "./home-page.module.css";
 
 export const HomePage = () => {
+  const { isEnabled, delayMs, toggleLatency } = useDemoLatency();
+
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -32,6 +35,33 @@ export const HomePage = () => {
             <li>RTK Query data fetching and cache invalidation</li>
             <li>Local Express mock API for development</li>
           </ul>
+
+          <section className={styles.demoNotice} aria-label="Loading-state demo">
+            <div className={styles.demoNoticeCopy}>
+              <p className={styles.demoNoticeLabel}>Loading-state demo</p>
+              <p className={styles.demoNoticeText}>
+                This portfolio intentionally simulates API latency so skeletons,
+                loading transitions, and async UI states are visible during review.
+              </p>
+              <p className={styles.demoNoticeMeta}>
+                Current latency: {isEnabled ? `${delayMs} ms` : "disabled"}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              className={styles.demoToggle}
+              aria-pressed={isEnabled}
+              onClick={toggleLatency}
+            >
+              <span className={styles.demoToggleTrack}>
+                <span className={styles.demoToggleKnob} />
+              </span>
+              <span className={styles.demoToggleText}>
+                {isEnabled ? "Latency on" : "Latency off"}
+              </span>
+            </button>
+          </section>
         </div>
 
         <div className={styles.previewPanel}>

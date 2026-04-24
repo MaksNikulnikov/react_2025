@@ -70,7 +70,7 @@ router.post("/review/:restaurantId", (req, res) => {
   });
 
   if (createReviewError) {
-    reply(res, { message: createReviewError.message }, 1000, createReviewError.status);
+    reply(res, { message: createReviewError.message }, 0, createReviewError.status);
     return;
   }
 
@@ -92,12 +92,12 @@ router.patch("/review/:reviewId", (req, res) => {
   const review = reviewId && getById(reviews)(reviewId);
 
   if (!reviewId || !body) {
-    reply(res, { message: "Review update payload is required." }, 1000, 400);
+    reply(res, { message: "Review update payload is required." }, 0, 400);
     return;
   }
 
   if (!review) {
-    reply(res, { message: "Review not found." }, 1000, 404);
+    reply(res, { message: "Review not found." }, 0, 404);
     return;
   }
 

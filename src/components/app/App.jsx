@@ -5,16 +5,19 @@ import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 import { AppRoutes } from "../../routes/AppRoutes";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
+import { DemoLatencyContextProvider } from "../demo-latency-context/DemoLatencyContextProvider";
 
 export const App = () => {
   return (
     <ErrorBoundary>
       <Provider store={store}>
-        <ThemeContextProvider>
-          <UserContextProvider>
-            <AppRoutes />
-          </UserContextProvider>
-        </ThemeContextProvider>
+        <DemoLatencyContextProvider>
+          <ThemeContextProvider>
+            <UserContextProvider>
+              <AppRoutes />
+            </UserContextProvider>
+          </ThemeContextProvider>
+        </DemoLatencyContextProvider>
       </Provider>
     </ErrorBoundary>
   );

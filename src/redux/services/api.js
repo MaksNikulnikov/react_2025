@@ -1,12 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_BASE_URL, IS_GITHUB_PAGES_DEMO_API } from "../../config/api";
+import { getDemoLatencyMs } from "../../config/demo-latency";
 import { createPagesBaseQuery } from "./pages-base-query";
 
-const baseQuery = IS_GITHUB_PAGES_DEMO_API
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const rawBaseQuery = IS_GITHUB_PAGES_DEMO_API
   ? createPagesBaseQuery()
   : fetchBaseQuery({
       baseUrl: API_BASE_URL,
     });
+
+const baseQuery = async (args, api, extraOptions) => {
+  const latencyMs = getDemoLatencyMs();
+
+  if (latencyMs > 0) {
+    await wait(latencyMs);
+  }
+
+  return rawBaseQuery(args, api, extraOptions);
+};
 
 export const api = createApi({
   reducerPath: "api",
