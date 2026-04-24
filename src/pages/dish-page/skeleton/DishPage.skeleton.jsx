@@ -1,12 +1,14 @@
+import { SkeletonBlock } from "../../../components/skeleton-block/SkeletonBlock";
 import styles from "./dish-page-skeleton.module.css";
 
 export const DishPageSkeleton = () => {
   return (
     <div className={styles.dishPage}>
-      <div className={styles.skeletonTitle} />
-      <div className={styles.skeletonText} />
-      <div className={styles.skeletonTextShort} />
-      <div className={styles.skeletonCounter} />
+      <SkeletonBlock className={styles.skeletonTitle} />
+      <SkeletonBlock className={styles.skeletonText} />
+      <SkeletonBlock className={styles.skeletonTextShort} />
+      <SkeletonBlock className={styles.skeletonIngredients} />
+      <SkeletonBlock className={styles.skeletonCounter} />
     </div>
   );
 };

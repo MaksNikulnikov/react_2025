@@ -1,9 +1,6 @@
 .skeleton {
-  padding: 16px;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: var(--surface-primary);
   padding: 1.5rem;
+  background-color: var(--surface-primary);
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
   margin-bottom: 2rem;
@@ -11,36 +8,23 @@
 }
 
 .title {
-  width: 12rem;
-  height: 3rem;
-  background: var(--skeleton-base);
-  border-radius: 6px;
-  animation: pulse 1.5s infinite ease-in-out;
+  width: 14rem;
+  height: 2.2rem;
   margin-bottom: 1rem;
 }
 
 .tabs {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .tab {
-  width: 8rem;
-  height: 3rem;
-  background: var(--skeleton-base);
-  border-radius: 6px;
-  animation: pulse 1.5s infinite ease-in-out;
+  width: 7rem;
+  height: 2.6rem;
+  border-radius: 10px;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+.content {
+  min-height: 16rem;
 }

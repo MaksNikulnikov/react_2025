@@ -1,24 +1,115 @@
-.content {
+.reviews {
+  margin-top: 2rem;
+}
+
+.title {
+  width: 7rem;
+  height: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.block {
+.card {
+  background: var(--surface-primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem;
+  display: flex;
+  gap: 0.9rem;
+  flex-direction: column;
+  border: 1px solid var(--border-soft);
+}
+
+.textPrimary {
+  width: 100%;
+  height: 1.05rem;
+}
+
+.textSecondary {
+  width: 72%;
+  height: 1.05rem;
+}
+
+.rating {
+  width: 7.5rem;
+  height: 2.1rem;
+  border-radius: 999px;
+}
+
+.author {
+  width: 9rem;
+  height: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-soft);
+  margin-top: 1.5rem;
+}
+
+.formHint {
+  width: 10rem;
+  height: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  width: 4rem;
+  height: 0.9rem;
+}
+
+.fieldLabelSmall {
+  width: 3rem;
+  height: 0.9rem;
+}
+
+.textarea {
+  width: 100%;
+  height: 5.25rem;
+  border-radius: 10px;
+}
+
+.select {
+  width: 100%;
+  max-width: 10rem;
+  height: 2.6rem;
+  border-radius: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.buttonSecondary,
+.buttonPrimary {
+  width: 7rem;
   height: 2.5rem;
-  background: var(--skeleton-base);
-  border-radius: 4px;
-  animation: pulse 1.5s infinite ease-in-out;
+  border-radius: 10px;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
+@media (max-width: 640px) {
+  .card {
+    padding: 1.1rem;
   }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
+
+  .actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }

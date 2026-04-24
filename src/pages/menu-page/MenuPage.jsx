@@ -1,11 +1,13 @@
-import { useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import { MenuItem } from "../../components/menu-item/MenuItem";
 import styles from "./menu-page.module.css";
 import { StatusMessage } from "../../components/status-message/StatusMessage";
 import { useGetDishesByRestaurantIdQuery } from "../../redux/services/api";
+import { MenuPageSkeleton } from "./skeleton/MenuPage.skeleton";
 
 export const MenuPage = () => {
   const { restaurantId } = useParams();
+  const restaurant = useOutletContext();
   const {
     data: dishes = [],
     isLoading,
@@ -16,11 +18,7 @@ export const MenuPage = () => {
     <>
       <h3 className={styles.title}>Menu</h3>
       {isLoading ? (
-        <StatusMessage
-          className={styles.message}
-          tone="loading"
-          title="Loading menu..."
-        />
+        <MenuPageSkeleton rowCount={restaurant?.menu?.length} />
       ) : isError ? (
         <StatusMessage
           className={styles.message}
