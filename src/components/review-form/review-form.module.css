@@ -37,6 +37,18 @@
   color: var(--text-primary);
 }
 
+.select {
+  padding-right: 2.55rem;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1rem 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
 .textarea {
   resize: vertical;
   min-height: 80px;

@@ -33,10 +33,12 @@ export const Header = () => {
 
         <div className={styles.actions}>
           <UserSession />
-          <Button onClick={toggleTheme}>{themeLabel}</Button>
-          <Button onClick={() => setIsCartOpen(true)} ref={cartButtonRef}>
-            {cartButtonName}
-          </Button>
+          <div className={styles.utilityActions}>
+            <Button onClick={toggleTheme}>{themeLabel}</Button>
+            <Button onClick={() => setIsCartOpen(true)} ref={cartButtonRef}>
+              {cartButtonName}
+            </Button>
+          </div>
           <Modal
             open={isCartOpen}
             onClose={() => setIsCartOpen(false)}

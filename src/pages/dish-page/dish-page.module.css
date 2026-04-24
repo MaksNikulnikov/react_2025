@@ -3,7 +3,7 @@
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow-soft);
-  margin: 2rem auto;
+  margin: 0 auto;
   max-width: 600px;
   border: 1px solid var(--border-soft);
   color: var(--text-primary);
@@ -30,4 +30,20 @@
 .counterWrapper {
   width: fit-content;
   max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .dishPage {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.55rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .price,
+  .ingredients {
+    margin-bottom: 0.85rem;
+  }
 }

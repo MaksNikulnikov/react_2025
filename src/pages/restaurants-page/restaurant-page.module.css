@@ -55,11 +55,19 @@
 
 .filterSelect {
   min-height: 44px;
-  padding: 0.65rem 0.85rem;
+  padding: 0.65rem 2.65rem 0.65rem 0.85rem;
   border-radius: 12px;
   border: 1px solid var(--border-soft);
   background: var(--surface-primary);
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+  background-size: 1rem 1rem;
   color: var(--text-primary);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 }
 
 @media (max-width: 700px) {

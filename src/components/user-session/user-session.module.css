@@ -20,11 +20,19 @@
 .select {
   min-width: 180px;
   min-height: 40px;
-  padding: 0.55rem 0.75rem;
+  padding: 0.55rem 2.55rem 0.55rem 0.75rem;
   border: 1px solid var(--border-inverse);
   border-radius: 10px;
   background-color: var(--surface-input);
+  background-image: var(--select-chevron-inverse);
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 1rem 1rem;
   color: var(--text-inverse);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
 }
 
 .select option {
@@ -43,4 +51,32 @@
 
 .error {
   color: var(--status-error-text);
+}
+
+@media (max-width: 640px) {
+  .session {
+    width: 100%;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .summary {
+    width: 100%;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .select {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
